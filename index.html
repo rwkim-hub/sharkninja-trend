@@ -8,983 +8,546 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --bg: #050508;
-  --bg1: #0a0a10;
-  --bg2: #0e0e16;
-  --bg3: #12121c;
-  --border: rgba(255,255,255,0.055);
-  --border-h: rgba(255,255,255,0.13);
-  --t1: #ededf5;
-  --t2: #7070a0;
-  --t3: #40405a;
-  --red: #ff5555; --red-bg: rgba(255,85,85,0.08); --red-b: rgba(255,85,85,0.22);
-  --amber: #f5a623; --amber-bg: rgba(245,166,35,0.08); --amber-b: rgba(245,166,35,0.22);
-  --green: #3dd68c; --green-bg: rgba(61,214,140,0.08); --green-b: rgba(61,214,140,0.22);
-  --blue: #60a5fa; --blue-bg: rgba(96,165,250,0.08); --blue-b: rgba(96,165,250,0.22);
-  --purple: #a78bfa; --purple-bg: rgba(167,139,250,0.08); --purple-b: rgba(167,139,250,0.22);
-  --teal: #2dd4bf;
-  --ease: cubic-bezier(0.32,0.72,0,1);
+  --bg:#050508; --bg1:#0a0a10; --bg2:#0e0e16; --bg3:#12121c;
+  --bd:rgba(255,255,255,0.06); --bdh:rgba(255,255,255,0.14);
+  --t1:#ededf5; --t2:#7070a0; --t3:#40405a;
+  --red:#ff5555; --red-bg:rgba(255,85,85,0.08); --red-b:rgba(255,85,85,0.22);
+  --amber:#f5a623; --amb-bg:rgba(245,166,35,0.08); --amb-b:rgba(245,166,35,0.22);
+  --green:#3dd68c; --grn-bg:rgba(61,214,140,0.08); --grn-b:rgba(61,214,140,0.22);
+  --blue:#60a5fa; --blu-bg:rgba(96,165,250,0.08); --blu-b:rgba(96,165,250,0.22);
+  --purple:#a78bfa; --pur-bg:rgba(167,139,250,0.08); --pur-b:rgba(167,139,250,0.22);
+  --ease:cubic-bezier(0.32,0.72,0,1);
 }
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 60% 40% at 20% 0%,rgba(96,165,250,0.05) 0%,transparent 60%),radial-gradient(ellipse 50% 35% at 80% 100%,rgba(167,139,250,0.04) 0%,transparent 60%)}
 
-html { scroll-behavior: smooth; }
+/* NAV */
+.nav-wrap{position:sticky;top:14px;z-index:100;display:flex;justify-content:center;padding:14px 24px 0;pointer-events:none}
+.nav{pointer-events:all;background:rgba(8,8,14,0.82);border:1px solid var(--bdh);border-radius:999px;padding:7px 7px 7px 18px;display:flex;align-items:center;gap:6px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.04),0 20px 60px rgba(0,0,0,0.5)}
+.nav-brand{font-size:13px;font-weight:800;letter-spacing:-0.01em;margin-right:6px;white-space:nowrap}
+.nav-brand span{color:var(--blue)}
+.npill{font-size:11px;font-weight:500;padding:5px 13px;border-radius:999px;color:var(--t2);cursor:pointer;background:none;border:1px solid transparent;font-family:inherit;transition:all .3s var(--ease);white-space:nowrap}
+.npill:hover{color:var(--t1);background:rgba(255,255,255,0.06)}
+.npill.on{color:var(--t1);background:rgba(255,255,255,0.1);border-color:var(--bdh)}
+.nav-wk{font-size:11px;font-weight:600;padding:7px 14px;border-radius:999px;background:var(--blu-bg);color:var(--blue);border:1px solid var(--blu-b);margin-left:2px}
 
-body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background: var(--bg);
-  color: var(--t1);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+/* LAYOUT */
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
 
-/* ── Ambient Glow ── */
-.ambient {
-  position: fixed; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 60% 40% at 20% 0%, rgba(96,165,250,0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 35% at 80% 100%, rgba(167,139,250,0.04) 0%, transparent 60%);
-}
+/* HERO */
+.hero{padding:72px 0 44px;animation:fadeUp .8s var(--ease) .05s both}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);padding:5px 14px;border-radius:999px;border:1px solid var(--bd);margin-bottom:18px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s var(--ease) infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
+.hero-row{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+h1{font-size:clamp(28px,4vw,50px);font-weight:800;line-height:1.08;letter-spacing:-.04em}
+h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
+.hero-badges{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.badge{font-size:11px;font-weight:500;padding:4px 12px;border-radius:999px;border:1px solid var(--bd)}
+.b-grn{background:var(--grn-bg);color:var(--green);border-color:var(--grn-b)}
+.b-blu{background:var(--blu-bg);color:var(--blue);border-color:var(--blu-b)}
+.b-gray{color:var(--t2)}
+.wk-block{text-align:right;flex-shrink:0}
+.wk-num{font-size:clamp(44px,6vw,76px);font-weight:800;color:var(--t3);letter-spacing:-.06em;line-height:1}
+.wk-range{font-size:12px;color:var(--t3);margin-top:4px}
 
-.wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+/* CONTROLS */
+.controls{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap;animation:fadeUp .8s var(--ease) .12s both}
+.srch-wrap{position:relative;flex:1;min-width:180px;max-width:300px}
+.srch-wrap svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--t3);pointer-events:none}
+.srch{width:100%;background:var(--bg1);border:1px solid var(--bd);border-radius:11px;padding:9px 13px 9px 36px;font-size:12px;font-family:inherit;color:var(--t1);outline:none;transition:border-color .3s var(--ease)}
+.srch::placeholder{color:var(--t3)} .srch:focus{border-color:var(--bdh)}
+.filters{display:flex;gap:5px;flex-wrap:wrap}
+.fbtn{font-size:11px;font-weight:500;padding:7px 13px;border-radius:999px;border:1px solid var(--bd);background:none;color:var(--t2);cursor:pointer;font-family:inherit;transition:all .3s var(--ease)}
+.fbtn:hover{color:var(--t1);border-color:var(--bdh);background:rgba(255,255,255,0.04)}
+.fbtn.on{color:var(--t1);background:rgba(255,255,255,0.09);border-color:var(--bdh)}
+.fbtn.f-red.on{color:var(--red);background:var(--red-bg);border-color:var(--red-b)}
+.fbtn.f-amb.on{color:var(--amber);background:var(--amb-bg);border-color:var(--amb-b)}
+.fbtn.f-blu.on{color:var(--blue);background:var(--blu-bg);border-color:var(--blu-b)}
 
-/* ── Floating Nav ── */
-.nav-outer {
-  position: sticky; top: 16px; z-index: 100;
-  display: flex; justify-content: center;
-  padding: 16px 24px 0;
-  pointer-events: none;
-}
-.nav {
-  pointer-events: all;
-  background: rgba(10,10,16,0.75);
-  border: 1px solid var(--border-h);
-  border-radius: 999px;
-  padding: 8px 8px 8px 20px;
-  display: flex; align-items: center; gap: 8px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.04) inset, 0 20px 60px rgba(0,0,0,0.5);
-}
-.nav-brand {
-  font-size: 13px; font-weight: 700;
-  letter-spacing: -0.01em; color: var(--t1);
-  margin-right: 8px; white-space: nowrap;
-}
-.nav-brand span { color: var(--blue); }
-.nav-pill {
-  font-size: 11px; font-weight: 500;
-  padding: 5px 13px; border-radius: 999px;
-  color: var(--t2); cursor: pointer;
-  transition: all 0.35s var(--ease);
-  border: 1px solid transparent;
-  white-space: nowrap;
-}
-.nav-pill:hover { color: var(--t1); background: rgba(255,255,255,0.05); }
-.nav-pill.active { color: var(--t1); background: rgba(255,255,255,0.1); border-color: var(--border-h); }
-.nav-week {
-  font-size: 11px; font-weight: 600;
-  padding: 7px 16px; border-radius: 999px;
-  background: var(--blue-bg); color: var(--blue);
-  border: 1px solid var(--blue-b);
-  margin-left: 4px;
-}
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;animation:fadeUp .8s var(--ease) .18s both}
+.sc{background:rgba(255,255,255,0.02);border:1px solid var(--bd);border-radius:20px;padding:2px;transition:border-color .35s var(--ease),transform .35s var(--ease)}
+.sc:hover{border-color:var(--bdh);transform:translateY(-2px)}
+.si{background:var(--bg1);border-radius:18px;padding:20px 22px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.04)}
+.sl{font-size:10px;letter-spacing:.08em;color:var(--t3);margin-bottom:8px}
+.sn{font-size:32px;font-weight:800;letter-spacing:-.05em;line-height:1}
+.ss{font-size:11px;color:var(--t3);margin-top:4px}
+.s-red .sn{color:var(--red)} .s-grn .sn{color:var(--green)} .s-blu .sn{color:var(--blue)}
 
-/* ── Hero Header ── */
-.hero {
-  padding: 80px 0 48px;
-  opacity: 0; transform: translateY(24px);
-}
-.hero.visible { animation: fadeUp 0.9s var(--ease) forwards; }
-.eyebrow {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--t3); padding: 5px 14px; border-radius: 999px;
-  border: 1px solid var(--border); margin-bottom: 20px;
-}
-.live { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s var(--ease) infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(.75)} }
+/* GRID */
+.tgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:10px;margin-bottom:12px}
+.card{background:rgba(255,255,255,0.02);border:1px solid var(--bd);border-radius:22px;padding:2px;cursor:pointer;transition:border-color .35s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease);animation:fadeUp .8s var(--ease) both}
+.card:hover{border-color:var(--bdh);transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,0.4)}
+.ci{background:var(--bg1);border-radius:20px;padding:22px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);height:100%}
+.c7{grid-column:span 7} .c5{grid-column:span 5} .c8{grid-column:span 8} .c4{grid-column:span 4} .c12{grid-column:span 12}
 
-.hero-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-h1 { font-size: clamp(32px,4vw,52px); font-weight: 800; line-height: 1.08; letter-spacing: -0.04em; }
-h1 .hl { color: var(--blue); }
-h1 .dim { color: var(--t3); font-weight: 400; }
-.hero-badges { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 14px; }
-.badge { font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--border); }
-.b-green { background: var(--green-bg); color: var(--green); border-color: var(--green-b); }
-.b-blue  { background: var(--blue-bg);  color: var(--blue);  border-color: var(--blue-b); }
-.b-gray  { color: var(--t2); }
+.clbl{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.chp{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px}
 
-.week-block { text-align: right; flex-shrink: 0; }
-.week-num { font-size: clamp(48px,7vw,80px); font-weight: 800; color: var(--t3); letter-spacing: -0.06em; line-height: 1; }
-.week-range { font-size: 12px; color: var(--t3); margin-top: 4px; }
+/* TREND ITEM */
+.ti{display:flex;align-items:flex-start;gap:12px;padding:13px 14px;background:var(--bg2);border:1px solid var(--bd);border-radius:13px;margin-bottom:8px;transition:border-color .25s var(--ease),background .25s var(--ease)}
+.ti:last-child{margin-bottom:0} .ti:hover{border-color:var(--bdh);background:var(--bg3)}
+.tico{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.tb{flex:1;min-width:0}
+.trow{display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap}
+.ttl{font-size:13px;font-weight:600}
+.ext{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:500;color:var(--t3);text-decoration:none;padding:2px 8px;border-radius:999px;border:1px solid var(--bd);flex-shrink:0;transition:color .2s,border-color .2s,background .2s}
+.ext:hover{color:var(--blue);border-color:var(--blu-b);background:var(--blu-bg)}
+.ext svg{width:8px;height:8px}
+.tdesc{font-size:12px;color:var(--t2);line-height:1.6}
+.tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.tag{font-size:10px;font-weight:500;padding:2px 8px;border-radius:999px;border:1px solid var(--bd);color:var(--t2)}
+.t-b{background:var(--blu-bg);color:var(--blue);border-color:var(--blu-b)}
+.t-p{background:var(--pur-bg);color:var(--purple);border-color:var(--pur-b)}
+.t-r{background:var(--red-bg);color:var(--red);border-color:var(--red-b)}
+.t-a{background:var(--amb-bg);color:var(--amber);border-color:var(--amb-b)}
 
-/* ── Search + Filter Bar ── */
-.controls {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 20px; flex-wrap: wrap;
-  opacity: 0; transform: translateY(16px);
-}
-.controls.visible { animation: fadeUp 0.8s var(--ease) 0.1s forwards; }
+/* BARS */
+.bars{display:flex;flex-direction:column;gap:13px}
+.brow{display:flex;align-items:center;gap:10px}
+.blbl{font-size:11px;color:var(--t2);width:105px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.btrk{flex:1;height:5px;background:rgba(255,255,255,0.05);border-radius:999px;overflow:hidden}
+.bfil{height:100%;border-radius:999px;width:0;transition:width 1.2s var(--ease)}
+.bval{font-size:11px;color:var(--t3);width:26px;text-align:right}
 
-.search-wrap {
-  position: relative; flex: 1; min-width: 200px; max-width: 320px;
-}
-.search-wrap svg {
-  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-  width: 14px; height: 14px; color: var(--t3); pointer-events: none;
-}
-.search {
-  width: 100%; background: var(--bg1); border: 1px solid var(--border);
-  border-radius: 12px; padding: 9px 14px 9px 38px;
-  font-size: 12px; font-family: inherit; color: var(--t1);
-  outline: none; transition: border-color 0.3s var(--ease);
-}
-.search::placeholder { color: var(--t3); }
-.search:focus { border-color: var(--border-h); }
+/* KW LIST */
+.kwl{display:flex;flex-direction:column;gap:6px}
+.kw{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;background:var(--bg2);border:1px solid var(--bd);border-radius:11px;font-size:12px;text-decoration:none;color:inherit;transition:border-color .2s,background .2s}
+.kw:hover{border-color:var(--bdh);background:var(--bg3)}
+.kwn{font-weight:500} .kwt{font-size:10px;color:var(--t3)}
 
-.filters { display: flex; gap: 6px; flex-wrap: wrap; }
-.filter-btn {
-  font-size: 11px; font-weight: 500; padding: 7px 14px; border-radius: 999px;
-  border: 1px solid var(--border); background: transparent; color: var(--t2);
-  cursor: pointer; font-family: inherit;
-  transition: all 0.3s var(--ease);
-}
-.filter-btn:hover { color: var(--t1); border-color: var(--border-h); background: rgba(255,255,255,0.04); }
-.filter-btn.active { color: var(--t1); background: rgba(255,255,255,0.09); border-color: var(--border-h); }
-.filter-btn.f-red.active    { color: var(--red);    background: var(--red-bg);    border-color: var(--red-b); }
-.filter-btn.f-amber.active  { color: var(--amber);  background: var(--amber-bg);  border-color: var(--amber-b); }
-.filter-btn.f-blue.active   { color: var(--blue);   background: var(--blue-bg);   border-color: var(--blue-b); }
-.filter-btn.f-purple.active { color: var(--purple); background: var(--purple-bg); border-color: var(--purple-b); }
+/* SUB 2-col */
+.sub2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 
-/* ── Stats Row ── */
-.stats {
-  display: grid; grid-template-columns: repeat(4,1fr); gap: 10px;
-  margin-bottom: 14px;
-  opacity: 0; transform: translateY(16px);
-}
-.stats.visible { animation: fadeUp 0.8s var(--ease) 0.12s forwards; }
-.stat-shell {
-  background: rgba(255,255,255,0.02); border: 1px solid var(--border);
-  border-radius: 20px; padding: 2px;
-  transition: border-color 0.35s var(--ease), transform 0.35s var(--ease);
-}
-.stat-shell:hover { border-color: var(--border-h); transform: translateY(-2px); }
-.stat-inner { background: var(--bg1); border-radius: 18px; padding: 20px 22px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04); }
-.stat-lbl { font-size: 10px; letter-spacing: 0.08em; color: var(--t3); margin-bottom: 8px; }
-.stat-n   { font-size: 32px; font-weight: 800; letter-spacing: -0.05em; line-height: 1; }
-.stat-sub { font-size: 11px; color: var(--t3); margin-top: 4px; }
-.s-red .stat-n { color: var(--red); }
-.s-green .stat-n { color: var(--green); }
-.s-blue .stat-n { color: var(--blue); }
+/* EMPTY */
+.empty{grid-column:span 12;text-align:center;padding:60px;display:none}
+.empty.show{display:block}
+.empty p{color:var(--t3);font-size:14px}
 
-/* ── Trend Grid ── */
-.trend-grid {
-  display: grid; grid-template-columns: repeat(12,1fr); gap: 10px;
-  margin-bottom: 14px;
-}
+/* COMP SECTION */
+.sec-lbl{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--t3);margin:26px 0 12px;display:flex;align-items:center;gap:12px;animation:fadeUp .7s var(--ease) .3s both}
+.sec-lbl::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--bd),transparent)}
+.cgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.csh{background:rgba(255,255,255,0.015);border:1px solid var(--bd);border-radius:20px;padding:2px;cursor:pointer;transition:border-color .35s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease);animation:fadeUp .8s var(--ease) both}
+.csh:hover{border-color:var(--bdh);transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,0,0,0.35)}
+.cc{background:var(--bg1);border-radius:18px;padding:18px 20px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.03)}
+.ch{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.clogo{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid var(--bd);flex-shrink:0}
+.cname{font-size:13px;font-weight:600} .csub{font-size:11px;color:var(--t3)}
+.cit{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:9px;margin-bottom:6px;text-decoration:none;color:inherit;transition:border-color .2s,background .2s}
+.cit:last-child{margin-bottom:0} .cit:hover{border-color:var(--bdh);background:var(--bg3)}
+.cdot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.ctxt{font-size:11px;color:var(--t2);line-height:1.55} .ctxt b{color:var(--t1);font-weight:500}
+.heat{font-size:9px;font-weight:600;padding:2px 8px;border-radius:999px;letter-spacing:.04em;margin-top:10px;display:inline-block}
+.h-hi{background:var(--red-bg);color:var(--red);border:1px solid var(--red-b)}
+.h-md{background:var(--amb-bg);color:var(--amber);border:1px solid var(--amb-b)}
+.h-lo{background:var(--grn-bg);color:var(--green);border:1px solid var(--grn-b)}
 
-/* ── Trend Card ── */
-.tc-shell {
-  background: rgba(255,255,255,0.02); border: 1px solid var(--border);
-  border-radius: 22px; padding: 2px;
-  cursor: pointer;
-  transition: border-color 0.35s var(--ease), transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
-  opacity: 0; transform: translateY(20px);
-}
-.tc-shell.visible { animation: fadeUp 0.8s var(--ease) forwards; }
-.tc-shell:hover { border-color: var(--border-h); transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
-.tc { background: var(--bg1); border-radius: 20px; padding: 22px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04); height: 100%; }
+/* FOOTER */
+.footer{padding:14px 22px;background:var(--bg1);border:1px solid var(--bd);border-radius:16px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--t3);margin-bottom:40px;animation:fadeUp .7s var(--ease) .4s both}
+.footer a{color:var(--purple);text-decoration:none} .footer a:hover{text-decoration:underline}
 
-.col-7  { grid-column: span 7; }
-.col-5  { grid-column: span 5; }
-.col-8  { grid-column: span 8; }
-.col-4  { grid-column: span 4; }
-.col-6  { grid-column: span 6; }
-.col-12 { grid-column: span 12; }
+/* MODAL */
+.mbg{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;pointer-events:none;background:rgba(0,0,0,0);transition:background .4s var(--ease)}
+.mbg.open{background:rgba(0,0,0,0.75);pointer-events:all;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.modal{background:var(--bg1);border:1px solid var(--bdh);border-radius:26px;max-width:560px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 40px 100px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.07);transform:translateY(28px) scale(0.96);opacity:0;transition:transform .45s var(--ease),opacity .45s var(--ease)}
+.mbg.open .modal{transform:translateY(0) scale(1);opacity:1}
+.mhd{padding:26px 26px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.mico{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.mtw{flex:1}
+.mey{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);margin-bottom:5px}
+.mtit{font-size:20px;font-weight:700;letter-spacing:-.02em}
+.mcls{width:32px;height:32px;border-radius:999px;background:rgba(255,255,255,0.07);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:14px;color:var(--t2);transition:background .2s,color .2s}
+.mcls:hover{background:rgba(255,255,255,0.13);color:var(--t1)}
+.mbd{padding:18px 26px 26px}
+.mdesc{font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:18px}
+.mst{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);margin-bottom:9px}
+.mideas{display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
+.idea{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px}
+.inum{font-size:11px;font-weight:700;color:var(--t3);width:18px;flex-shrink:0;margin-top:1px}
+.itxt{font-size:12px;color:var(--t2);line-height:1.6} .itxt b{color:var(--t1)}
+.mlinks{display:flex;gap:7px;flex-wrap:wrap}
+.mlink{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:8px 15px;border-radius:999px;border:1px solid var(--bd);color:var(--t2);text-decoration:none;transition:all .3s var(--ease)}
+.mlink:hover{color:var(--blue);border-color:var(--blu-b);background:var(--blu-bg)}
+.mlink svg{width:10px;height:10px}
+.mtags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:18px}
 
-.card-lbl {
-  font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--t3); margin-bottom: 18px; display: flex; align-items: center; gap: 8px;
-}
-.chip { width: 22px; height: 22px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 
-/* Trend list item */
-.ti {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 13px 14px; background: var(--bg2);
-  border: 1px solid var(--border); border-radius: 13px; margin-bottom: 8px;
-  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+@media(max-width:900px){
+  .tgrid{grid-template-columns:1fr}
+  .c7,.c5,.c8,.c4,.c12{grid-column:span 1}
+  .cgrid{grid-template-columns:repeat(2,1fr)}
+  .sub2{grid-template-columns:1fr}
 }
-.ti:last-child { margin-bottom: 0; }
-.ti:hover { border-color: var(--border-h); background: var(--bg3); }
-
-.ti-icon { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-.ti-body { flex: 1; min-width: 0; }
-.ti-row  { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
-.ti-title { font-size: 13px; font-weight: 600; }
-.ext {
-  display: inline-flex; align-items: center; gap: 3px;
-  font-size: 10px; font-weight: 500; color: var(--t3);
-  text-decoration: none; padding: 2px 8px; border-radius: 999px;
-  border: 1px solid var(--border); flex-shrink: 0;
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
-}
-.ext:hover { color: var(--blue); border-color: var(--blue-b); background: var(--blue-bg); }
-.ext svg { width: 8px; height: 8px; }
-.ti-desc { font-size: 12px; color: var(--t2); line-height: 1.6; }
-.tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
-.tag { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); color: var(--t2); }
-.t-blue   { background: var(--blue-bg);   color: var(--blue);   border-color: var(--blue-b); }
-.t-purple { background: var(--purple-bg); color: var(--purple); border-color: var(--purple-b); }
-.t-red    { background: var(--red-bg);    color: var(--red);    border-color: var(--red-b); }
-.t-amber  { background: var(--amber-bg);  color: var(--amber);  border-color: var(--amber-b); }
-
-/* ── Bar Chart ── */
-.bars { display: flex; flex-direction: column; gap: 13px; }
-.bar-row { display: flex; align-items: center; gap: 10px; }
-.bar-lbl { font-size: 11px; color: var(--t2); width: 105px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.bar-track { flex: 1; height: 5px; background: rgba(255,255,255,0.05); border-radius: 999px; overflow: hidden; }
-.bar-fill { height: 100%; border-radius: 999px; width: 0; transition: width 1.2s var(--ease); }
-.bar-val { font-size: 11px; color: var(--t3); width: 26px; text-align: right; }
-
-/* ── Keyword List ── */
-.kwlist { display: flex; flex-direction: column; gap: 6px; }
-.kw {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 13px; background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 11px; font-size: 12px; text-decoration: none; color: inherit;
-  transition: border-color 0.2s, background 0.2s;
-}
-.kw:hover { border-color: var(--border-h); background: var(--bg3); }
-.kw-name { font-weight: 500; }
-.kw-tag { font-size: 10px; color: var(--t3); }
-
-/* ── 2-col sub grid ── */
-.sub2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-
-/* ── Competitor Section ── */
-.sec-label {
-  font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--t3); margin: 28px 0 12px;
-  display: flex; align-items: center; gap: 12px;
-  opacity: 0; transform: translateY(12px);
-}
-.sec-label.visible { animation: fadeUp 0.7s var(--ease) forwards; }
-.sec-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, var(--border), transparent); }
-
-.comp-grid {
-  display: grid; grid-template-columns: repeat(4,1fr); gap: 10px;
-  margin-bottom: 14px;
-}
-.comp-shell {
-  background: rgba(255,255,255,0.015); border: 1px solid var(--border);
-  border-radius: 20px; padding: 2px;
-  cursor: pointer;
-  transition: border-color 0.35s var(--ease), transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
-  opacity: 0; transform: translateY(20px);
-}
-.comp-shell.visible { animation: fadeUp 0.8s var(--ease) forwards; }
-.comp-shell:hover { border-color: var(--border-h); transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.35); }
-.comp-card { background: var(--bg1); border-radius: 18px; padding: 18px 20px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
-.comp-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
-.comp-logo { width: 32px; height: 32px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 16px; border: 1px solid var(--border); }
-.comp-name { font-size: 13px; font-weight: 600; }
-.comp-sub  { font-size: 11px; color: var(--t3); }
-
-.ci {
-  display: flex; align-items: flex-start; gap: 8px;
-  padding: 8px 10px; background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 9px; margin-bottom: 6px;
-  text-decoration: none; color: inherit;
-  transition: border-color 0.2s, background 0.2s;
-}
-.ci:last-child { margin-bottom: 0; }
-.ci:hover { border-color: var(--border-h); background: var(--bg3); }
-.ci-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
-.ci-text { font-size: 11px; color: var(--t2); line-height: 1.55; }
-.ci-text b { color: var(--t1); font-weight: 500; }
-
-.heat { font-size: 9px; font-weight: 600; padding: 2px 8px; border-radius: 999px; letter-spacing: 0.04em; margin-top: 10px; display: inline-block; }
-.h-high { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-b); }
-.h-mid  { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-b); }
-.h-low  { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-b); }
-
-/* ── Footer ── */
-.footer {
-  padding: 14px 22px; background: var(--bg1); border: 1px solid var(--border);
-  border-radius: 16px; display: flex; align-items: center; justify-content: space-between;
-  font-size: 12px; color: var(--t3); margin-bottom: 40px;
-  opacity: 0; transform: translateY(12px);
-}
-.footer.visible { animation: fadeUp 0.7s var(--ease) forwards; }
-.footer a { color: var(--purple); text-decoration: none; }
-.footer a:hover { text-decoration: underline; }
-
-/* ── Empty State ── */
-.empty-state {
-  grid-column: span 12; text-align: center; padding: 60px 20px;
-  display: none;
-}
-.empty-state.show { display: block; }
-.empty-state p { color: var(--t3); font-size: 14px; }
-
-/* ── MODAL ── */
-.modal-bg {
-  position: fixed; inset: 0; z-index: 200;
-  background: rgba(0,0,0,0); backdrop-filter: blur(0px);
-  display: flex; align-items: center; justify-content: center;
-  padding: 24px;
-  pointer-events: none;
-  transition: background 0.4s var(--ease), backdrop-filter 0.4s var(--ease);
-}
-.modal-bg.open {
-  background: rgba(0,0,0,0.7); backdrop-filter: blur(16px);
-  pointer-events: all;
-}
-.modal {
-  background: var(--bg1); border: 1px solid var(--border-h);
-  border-radius: 26px; max-width: 560px; width: 100%;
-  max-height: 90vh; overflow-y: auto;
-  box-shadow: 0 40px 100px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07);
-  transform: translateY(32px) scale(0.96); opacity: 0;
-  transition: transform 0.45s var(--ease), opacity 0.45s var(--ease);
-}
-.modal-bg.open .modal { transform: translateY(0) scale(1); opacity: 1; }
-.modal-header { padding: 28px 28px 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
-.modal-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
-.modal-title-wrap { flex: 1; }
-.modal-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--t3); margin-bottom: 6px; }
-.modal-title { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
-.modal-close {
-  width: 32px; height: 32px; border-radius: 999px;
-  background: rgba(255,255,255,0.07); border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; flex-shrink: 0; font-size: 16px; color: var(--t2);
-  transition: background 0.2s, color 0.2s;
-}
-.modal-close:hover { background: rgba(255,255,255,0.12); color: var(--t1); }
-.modal-body { padding: 20px 28px 28px; }
-.modal-desc { font-size: 14px; color: var(--t2); line-height: 1.7; margin-bottom: 20px; }
-.modal-section-title { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--t3); margin-bottom: 10px; }
-.modal-ideas { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-.idea-item {
-  display: flex; align-items: flex-start; gap: 10px;
-  padding: 12px 14px; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
-}
-.idea-num { font-size: 11px; font-weight: 700; color: var(--t3); width: 18px; flex-shrink: 0; margin-top: 1px; }
-.idea-text { font-size: 12px; color: var(--t2); line-height: 1.6; }
-.idea-text b { color: var(--t1); }
-.modal-links { display: flex; gap: 8px; flex-wrap: wrap; }
-.modal-link {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 12px; font-weight: 500; padding: 8px 16px; border-radius: 999px;
-  border: 1px solid var(--border); color: var(--t2); text-decoration: none;
-  transition: all 0.3s var(--ease);
-}
-.modal-link:hover { color: var(--blue); border-color: var(--blue-b); background: var(--blue-bg); }
-.modal-link svg { width: 11px; height: 11px; }
-.modal-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 20px; }
-
-@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-
-/* ── Responsive ── */
-@media (max-width: 900px) {
-  .trend-grid { grid-template-columns: 1fr; }
-  .col-7,.col-5,.col-8,.col-4,.col-6,.col-12 { grid-column: span 1; }
-  .comp-grid { grid-template-columns: repeat(2,1fr); }
-  .sub2 { grid-template-columns: 1fr; }
-}
-@media (max-width: 640px) {
-  .stats { grid-template-columns: repeat(2,1fr); }
-  .comp-grid { grid-template-columns: 1fr; }
-  .nav-pill { display: none; }
-  h1 { font-size: 28px; }
-  .week-num { font-size: 48px; }
-  .modal { border-radius: 20px; }
-  .modal-header { padding: 22px 22px 0; }
-  .modal-body { padding: 16px 22px 22px; }
+@media(max-width:640px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .cgrid{grid-template-columns:1fr}
+  .npill{display:none}
+  h1{font-size:26px} .wk-num{font-size:44px}
 }
 </style>
 </head>
 <body>
-<div class="ambient"></div>
 
-<!-- ── Floating Nav ── -->
-<div class="nav-outer">
+<!-- NAV -->
+<div class="nav-wrap">
   <nav class="nav">
     <div class="nav-brand"><span>Shark</span>Ninja</div>
-    <button class="nav-pill active" data-nav="trends" onclick="navTo('trends',this)">트렌드</button>
-    <button class="nav-pill" data-nav="comp" onclick="navTo('comp',this)">경쟁사</button>
-    <div class="nav-week" id="nav-week">W26</div>
+    <button class="npill on" onclick="scrollTo('#trendGrid',this,'trends')">트렌드</button>
+    <button class="npill" onclick="scrollTo('#compSec',this,'comp')">경쟁사</button>
+    <div class="nav-wk">W26</div>
   </nav>
 </div>
 
 <div class="wrap">
 
-  <!-- ── Hero ── -->
-  <div class="hero" id="hero">
-    <div class="eyebrow"><span class="live"></span>Auto-generated · 매주 금요일 09:00 업데이트</div>
-    <div class="hero-row">
-      <div>
-        <h1><span class="hl">SharkNinja</span> 소셜<br>트렌드 리포트 <span class="dim">Weekly</span></h1>
-        <div class="hero-badges">
-          <span class="badge b-green">분석완료</span>
-          <span class="badge b-blue">경쟁사 모니터링 포함</span>
-          <span class="badge b-gray" id="report-date">2026년 26주차</span>
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow"><span class="dot"></span>Auto-generated · 매주 금요일 09:00 업데이트</div>
+  <div class="hero-row">
+    <div>
+      <h1><span class="hl">SharkNinja</span> 소셜<br>트렌드 리포트 <span class="dim">Weekly</span></h1>
+      <div class="hero-badges">
+        <span class="badge b-grn">분석완료</span>
+        <span class="badge b-blu">경쟁사 모니터링 포함</span>
+        <span class="badge b-gray">2026년 26주차</span>
+      </div>
+    </div>
+    <div class="wk-block">
+      <div class="wk-num">W26</div>
+      <div class="wk-range">2026.06.19 — 06.25</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="srch-wrap">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6.5" cy="6.5" r="4.5"/><path d="M10.5 10.5l3 3"/></svg>
+    <input class="srch" type="text" placeholder="키워드 검색…" id="srch" oninput="applyFilter()">
+  </div>
+  <div class="filters">
+    <button class="fbtn on"    data-f="all"    onclick="setF('all',this)">전체</button>
+    <button class="fbtn f-red" data-f="urgent" onclick="setF('urgent',this)">⚡ 긴급</button>
+    <button class="fbtn f-amb" data-f="soon"   onclick="setF('soon',this)">🟡 이번주</button>
+    <button class="fbtn f-blu" data-f="watch"  onclick="setF('watch',this)">👁 모니터링</button>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="sc"><div class="si"><div class="sl">수집 소스</div><div class="sn">2</div><div class="ss">Google · YouTube</div></div></div>
+  <div class="sc"><div class="si"><div class="sl">분석 키워드</div><div class="sn">12</div><div class="ss">이번 주 기준</div></div></div>
+  <div class="sc s-red"><div class="si"><div class="sl">긴급 소재</div><div class="sn">2</div><div class="ss">이번 주 必 사용</div></div></div>
+  <div class="sc s-grn"><div class="si"><div class="sl">콘텐츠 아이디어</div><div class="sn">14</div><div class="ss">포맷 포함</div></div></div>
+</div>
+
+<!-- TREND GRID -->
+<div class="tgrid" id="trendGrid">
+
+  <div class="card c7" data-f="urgent" data-kw="hearts2hearts lemon tang sm 케이팝 kpop 릴스 챌린지" style="animation-delay:.05s" onclick="openM('hearts')">
+    <div class="ci">
+      <div class="clbl"><span class="chp" style="background:var(--red-bg);color:var(--red)">⚡</span>긴급 — 이번 주 반드시 활용</div>
+      <div class="ti">
+        <div class="tico" style="background:var(--red-bg)">🎵</div>
+        <div class="tb">
+          <div class="trow">
+            <div class="ttl">Hearts2Hearts — Lemon Tang</div>
+            <a class="ext" href="https://trends.google.com/trends/explore?q=Hearts2Hearts&geo=KR" target="_blank" onclick="event.stopPropagation()">Google <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a>
+            <a class="ext" href="https://www.youtube.com/results?search_query=Hearts2Hearts+Lemon+Tang" target="_blank" onclick="event.stopPropagation()">YouTube <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a>
+          </div>
+          <div class="tdesc">SM 신인 그룹 신보 발매 직후. 챌린지 편승 타이밍 최고조. 릴스 제품 루틴 + 음원 활용 추천.</div>
+          <div class="tags"><span class="tag t-b">릴스</span><span class="tag t-b">언박싱</span><span class="tag">K-POP</span><span class="tag">뷰티·라이프</span></div>
         </div>
       </div>
-      <div class="week-block">
-        <div class="week-num" id="week-num">W26</div>
-        <div class="week-range" id="week-range">2026.06.19 — 06.25</div>
+      <div class="ti">
+        <div class="tico" style="background:var(--red-bg)">⚽</div>
+        <div class="tb">
+          <div class="trow">
+            <div class="ttl">FIFA 월드컵 2026</div>
+            <a class="ext" href="https://trends.google.com/trends/explore?q=FIFA+월드컵+2026&geo=KR" target="_blank" onclick="event.stopPropagation()">Google <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a>
+          </div>
+          <div class="tdesc">응원 관련 검색 급상승. 경기 전후 발행 필수. 숏폼으로 응원 분위기 + 제품 자연 노출.</div>
+          <div class="tags"><span class="tag t-b">숏폼</span><span class="tag">스포츠</span><span class="tag">식음료</span></div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ── Controls ── -->
-  <div class="controls" id="controls">
-    <div class="search-wrap">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-        <circle cx="6.5" cy="6.5" r="4.5"/><path d="M10.5 10.5l3 3"/>
-      </svg>
-      <input class="search" type="text" placeholder="키워드 검색…" id="searchInput" oninput="applyFilters()">
-    </div>
-    <div class="filters">
-      <button class="filter-btn active" data-filter="all" onclick="setFilter('all',this)">전체</button>
-      <button class="filter-btn f-red"    data-filter="urgent" onclick="setFilter('urgent',this)">⚡ 긴급</button>
-      <button class="filter-btn f-amber"  data-filter="soon"   onclick="setFilter('soon',this)">🟡 이번주</button>
-      <button class="filter-btn f-blue"   data-filter="watch"  onclick="setFilter('watch',this)">👁 모니터링</button>
-    </div>
-  </div>
-
-  <!-- ── Stats ── -->
-  <div class="stats" id="statsRow">
-    <div class="stat-shell">
-      <div class="stat-inner">
-        <div class="stat-lbl">수집 소스</div>
-        <div class="stat-n">2</div>
-        <div class="stat-sub">Google · YouTube</div>
-      </div>
-    </div>
-    <div class="stat-shell">
-      <div class="stat-inner">
-        <div class="stat-lbl">분석 키워드</div>
-        <div class="stat-n">12</div>
-        <div class="stat-sub">이번 주 기준</div>
-      </div>
-    </div>
-    <div class="stat-shell s-red">
-      <div class="stat-inner">
-        <div class="stat-lbl">긴급 소재</div>
-        <div class="stat-n">2</div>
-        <div class="stat-sub">이번 주 必 사용</div>
-      </div>
-    </div>
-    <div class="stat-shell s-green">
-      <div class="stat-inner">
-        <div class="stat-lbl">콘텐츠 아이디어</div>
-        <div class="stat-n">14</div>
-        <div class="stat-sub">포맷 포함</div>
+  <div class="card c5" data-f="all" data-kw="관심도 차트 점수" style="animation-delay:.1s" onclick="event.stopPropagation()">
+    <div class="ci">
+      <div class="clbl"><span class="chp" style="background:var(--pur-bg);color:var(--purple)">📊</span>트렌드 관심도 점수</div>
+      <div class="bars">
+        <div class="brow"><div class="blbl">Hearts2Hearts</div><div class="btrk"><div class="bfil" data-w="92" style="background:var(--red)"></div></div><div class="bval">92</div></div>
+        <div class="brow"><div class="blbl">FIFA 월드컵</div><div class="btrk"><div class="bfil" data-w="88" style="background:var(--red)"></div></div><div class="bval">88</div></div>
+        <div class="brow"><div class="blbl">스파이더맨</div><div class="btrk"><div class="bfil" data-w="74" style="background:var(--amber)"></div></div><div class="bval">74</div></div>
+        <div class="brow"><div class="blbl">여름휴가</div><div class="btrk"><div class="bfil" data-w="68" style="background:var(--amber)"></div></div><div class="bval">68</div></div>
+        <div class="brow"><div class="blbl">Stray Kids</div><div class="btrk"><div class="bfil" data-w="61" style="background:var(--green)"></div></div><div class="bval">61</div></div>
+        <div class="brow"><div class="blbl">냉감 소재</div><div class="btrk"><div class="bfil" data-w="55" style="background:var(--green)"></div></div><div class="bval">55</div></div>
       </div>
     </div>
   </div>
 
-  <!-- ── Trend Grid ── -->
-  <div class="trend-grid" id="trendGrid">
-
-    <!-- 긴급 트렌드 -->
-    <div class="tc-shell col-7" data-filter="urgent" data-keywords="hearts2hearts lemon tang sm 케이팝 kpop 릴스 챌린지" onclick="openModal('hearts')">
-      <div class="tc">
-        <div class="card-lbl"><span class="chip" style="background:var(--red-bg);color:var(--red);">⚡</span>긴급 — 이번 주 반드시 활용</div>
-        <div class="ti">
-          <div class="ti-icon" style="background:var(--red-bg);">🎵</div>
-          <div class="ti-body">
-            <div class="ti-row">
-              <div class="ti-title">Hearts2Hearts — Lemon Tang</div>
-              <a class="ext" href="https://trends.google.com/trends/explore?q=Hearts2Hearts&geo=KR" target="_blank" onclick="event.stopPropagation()">
-                Google <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg>
-              </a>
-              <a class="ext" href="https://www.youtube.com/results?search_query=Hearts2Hearts+Lemon+Tang" target="_blank" onclick="event.stopPropagation()">
-                YouTube <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg>
-              </a>
-            </div>
-            <div class="ti-desc">SM 신인 그룹 신보 발매 직후. 챌린지 편승 타이밍 최고조. 릴스 제품 루틴 + 음원 활용 추천.</div>
-            <div class="tags"><span class="tag t-blue">릴스</span><span class="tag t-blue">언박싱</span><span class="tag">K-POP</span><span class="tag">뷰티·라이프</span></div>
+  <div class="card c8" data-f="soon" data-kw="스파이더맨 여름휴가 stray kids 냉감 카드뉴스 릴스 숏폼" style="animation-delay:.15s" onclick="openM('soon')">
+    <div class="ci">
+      <div class="clbl"><span class="chp" style="background:var(--amb-bg);color:var(--amber)">🟡</span>이번 주~다음 주 활용 가능</div>
+      <div class="sub2">
+        <div class="ti" style="margin-bottom:0" onclick="event.stopPropagation();openM('spider')">
+          <div class="tico" style="background:var(--amb-bg)">🎬</div>
+          <div class="tb">
+            <div class="trow"><div class="ttl">스파이더맨: 브랜드 뉴 데이</div><a class="ext" href="https://trends.google.com/trends/explore?q=스파이더맨&geo=KR" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a></div>
+            <div class="tdesc">카드뉴스: New Arrival 소개 포맷</div>
+            <div class="tags"><span class="tag t-p">카드뉴스</span><span class="tag">패션·뷰티</span></div>
           </div>
         </div>
-        <div class="ti">
-          <div class="ti-icon" style="background:var(--red-bg);">⚽</div>
-          <div class="ti-body">
-            <div class="ti-row">
-              <div class="ti-title">FIFA 월드컵 2026 — 한국 경기</div>
-              <a class="ext" href="https://trends.google.com/trends/explore?q=FIFA+월드컵+2026&geo=KR" target="_blank" onclick="event.stopPropagation()">
-                Google <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg>
-              </a>
-            </div>
-            <div class="ti-desc">응원 관련 검색 급상승. 경기 전후 발행 필수. 숏폼으로 응원 분위기 + 제품 자연 노출.</div>
-            <div class="tags"><span class="tag t-blue">숏폼</span><span class="tag">스포츠</span><span class="tag">식음료</span></div>
+        <div class="ti" style="margin-bottom:0" onclick="event.stopPropagation();openM('summer')">
+          <div class="tico" style="background:var(--amb-bg)">🏖️</div>
+          <div class="tb">
+            <div class="trow"><div class="ttl">여름휴가 — 짧고 가깝게</div><a class="ext" href="https://trends.google.com/trends/explore?q=여름휴가&geo=KR" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a></div>
+            <div class="tdesc">릴스: 근거리 여행 vlog 포맷</div>
+            <div class="tags"><span class="tag t-p">릴스</span><span class="tag">라이프스타일</span></div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- 관심도 차트 -->
-    <div class="tc-shell col-5" data-filter="all" data-keywords="관심도 점수 차트 트렌드" onclick="void(0)">
-      <div class="tc">
-        <div class="card-lbl"><span class="chip" style="background:var(--purple-bg);color:var(--purple);">📊</span>트렌드 관심도 점수</div>
-        <div class="bars" id="barChart">
-          <div class="bar-row"><div class="bar-lbl">Hearts2Hearts</div><div class="bar-track"><div class="bar-fill" data-w="92" style="background:var(--red);"></div></div><div class="bar-val">92</div></div>
-          <div class="bar-row"><div class="bar-lbl">FIFA 월드컵</div><div class="bar-track"><div class="bar-fill" data-w="88" style="background:var(--red);"></div></div><div class="bar-val">88</div></div>
-          <div class="bar-row"><div class="bar-lbl">스파이더맨</div><div class="bar-track"><div class="bar-fill" data-w="74" style="background:var(--amber);"></div></div><div class="bar-val">74</div></div>
-          <div class="bar-row"><div class="bar-lbl">여름휴가</div><div class="bar-track"><div class="bar-fill" data-w="68" style="background:var(--amber);"></div></div><div class="bar-val">68</div></div>
-          <div class="bar-row"><div class="bar-lbl">Stray Kids</div><div class="bar-track"><div class="bar-fill" data-w="61" style="background:var(--green);"></div></div><div class="bar-val">61</div></div>
-          <div class="bar-row"><div class="bar-lbl">냉감 소재</div><div class="bar-track"><div class="bar-fill" data-w="55" style="background:var(--green);"></div></div><div class="bar-val">55</div></div>
+        <div class="ti" style="margin-bottom:0" onclick="event.stopPropagation();openM('straykids')">
+          <div class="tico" style="background:var(--amb-bg)">🎤</div>
+          <div class="tb">
+            <div class="trow"><div class="ttl">Stray Kids — RUN IT</div><a class="ext" href="https://www.youtube.com/results?search_query=Stray+Kids+RUN+IT" target="_blank" onclick="event.stopPropagation()">YT <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a></div>
+            <div class="tdesc">숏폼: 역동적 제품 역량 강조</div>
+            <div class="tags"><span class="tag t-p">숏폼</span><span class="tag">스포츠</span></div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <!-- 이번주~다음주 -->
-    <div class="tc-shell col-8" data-filter="soon" data-keywords="스파이더맨 여름휴가 stray kids 냉감 카드뉴스 릴스 숏폼" onclick="openModal('soon')">
-      <div class="tc">
-        <div class="card-lbl"><span class="chip" style="background:var(--amber-bg);color:var(--amber);">🟡</span>이번 주~다음 주 활용 가능</div>
-        <div class="sub2">
-          <div class="ti" style="margin-bottom:0;" onclick="event.stopPropagation();openModal('spider')">
-            <div class="ti-icon" style="background:var(--amber-bg);">🎬</div>
-            <div class="ti-body">
-              <div class="ti-row">
-                <div class="ti-title">스파이더맨: 브랜드 뉴 데이</div>
-                <a class="ext" href="https://trends.google.com/trends/explore?q=스파이더맨&geo=KR" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a>
-              </div>
-              <div class="ti-desc">카드뉴스: New Arrival 소개 포맷 활용</div>
-              <div class="tags"><span class="tag t-purple">카드뉴스</span><span class="tag">패션·뷰티</span></div>
-            </div>
-          </div>
-          <div class="ti" style="margin-bottom:0;" onclick="event.stopPropagation();openModal('summer')">
-            <div class="ti-icon" style="background:var(--amber-bg);">🏖️</div>
-            <div class="ti-body">
-              <div class="ti-row">
-                <div class="ti-title">여름휴가 — 짧고 가깝게</div>
-                <a class="ext" href="https://trends.google.com/trends/explore?q=여름휴가&geo=KR" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a>
-              </div>
-              <div class="ti-desc">릴스: 근거리 여행 vlog 포맷</div>
-              <div class="tags"><span class="tag t-purple">릴스</span><span class="tag">라이프스타일</span></div>
-            </div>
-          </div>
-          <div class="ti" style="margin-bottom:0;" onclick="event.stopPropagation();openModal('straykids')">
-            <div class="ti-icon" style="background:var(--amber-bg);">🎤</div>
-            <div class="ti-body">
-              <div class="ti-row">
-                <div class="ti-title">Stray Kids — RUN IT</div>
-                <a class="ext" href="https://www.youtube.com/results?search_query=Stray+Kids+RUN+IT" target="_blank" onclick="event.stopPropagation()">YouTube <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a>
-              </div>
-              <div class="ti-desc">숏폼: 역동적 제품 역량 강조</div>
-              <div class="tags"><span class="tag t-purple">숏폼</span><span class="tag">스포츠</span></div>
-            </div>
-          </div>
-          <div class="ti" style="margin-bottom:0;" onclick="event.stopPropagation();openModal('uv')">
-            <div class="ti-icon" style="background:var(--amber-bg);">☀️</div>
-            <div class="ti-body">
-              <div class="ti-row">
-                <div class="ti-title">자외선 차단 · 냉감 소재</div>
-                <a class="ext" href="https://trends.google.com/trends/explore?q=냉감&geo=KR" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a>
-              </div>
-              <div class="ti-desc">카드뉴스: SPF 제품 올바른 사용법</div>
-              <div class="tags"><span class="tag t-purple">카드뉴스</span><span class="tag">뷰티</span></div>
-            </div>
+        <div class="ti" style="margin-bottom:0" onclick="event.stopPropagation();openM('uv')">
+          <div class="tico" style="background:var(--amb-bg)">☀️</div>
+          <div class="tb">
+            <div class="trow"><div class="ttl">자외선 차단 · 냉감 소재</div><a class="ext" href="https://trends.google.com/trends/explore?q=냉감&geo=KR" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a></div>
+            <div class="tdesc">카드뉴스: SPF 제품 올바른 사용법</div>
+            <div class="tags"><span class="tag t-p">카드뉴스</span><span class="tag">뷰티</span></div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- 모니터링 -->
-    <div class="tc-shell col-4" data-filter="watch" data-keywords="모니터링 스파이더맨 월드컵 선크림 스테이케이션">
-      <div class="tc">
-        <div class="card-lbl"><span class="chip" style="background:var(--blue-bg);color:var(--blue);">👁</span>다음 주 모니터링</div>
-        <div class="kwlist">
-          <a class="kw" href="https://trends.google.com/trends/explore?q=스파이더맨+개봉&geo=KR" target="_blank"><span class="kw-name">스파이더맨 개봉</span><span class="kw-tag">예측</span></a>
-          <a class="kw" href="https://trends.google.com/trends/explore?q=월드컵+16강&geo=KR" target="_blank"><span class="kw-name">월드컵 16강</span><span class="kw-tag">예측</span></a>
-          <a class="kw" href="https://trends.google.com/trends/explore?q=여름+선크림&geo=KR" target="_blank"><span class="kw-name">여름 선크림 추천</span><span class="kw-tag">파생</span></a>
-          <a class="kw" href="https://trends.google.com/trends/explore?q=스테이케이션&geo=KR" target="_blank"><span class="kw-name">스테이케이션</span><span class="kw-tag">파생</span></a>
-          <a class="kw" href="https://trends.google.com/trends/explore?q=Hearts2Hearts&geo=KR" target="_blank"><span class="kw-name">Hearts2Hearts 컴백</span><span class="kw-tag">예측</span></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Empty state -->
-    <div class="empty-state" id="emptyState"><p>검색 결과가 없습니다</p></div>
-
-  </div><!-- /trendGrid -->
-
-  <!-- ── Competitor Section ── -->
-  <div class="sec-label" id="compLabel">🔍 경쟁사 소셜 모니터링</div>
-  <div class="comp-grid" id="compGrid">
-
-    <div class="comp-shell" onclick="openModal('dyson')">
-      <div class="comp-card">
-        <div class="comp-head">
-          <div class="comp-logo" style="background:rgba(255,255,255,0.04);">💨</div>
-          <div><div class="comp-name">Dyson</div><div class="comp-sub">공기청정 · 헤어케어</div></div>
-        </div>
-        <a class="ci" href="https://www.instagram.com/dyson_korea/" target="_blank" onclick="event.stopPropagation()">
-          <div class="ci-dot" style="background:var(--red);"></div>
-          <div class="ci-text"><b>여름 헤어케어 캠페인</b> 강도 HIGH. Airwrap 릴스 주 3회 발행 중</div>
-        </a>
-        <a class="ci" href="https://www.youtube.com/@DysonKorea" target="_blank" onclick="event.stopPropagation()">
-          <div class="ci-dot" style="background:var(--amber);"></div>
-          <div class="ci-text"><b>공기청정기 냉방 시즌</b> 연계 숏폼. 실내 공기질 UGC 유도</div>
-        </a>
-        <a class="ci" href="https://trends.google.com/trends/explore?q=다이슨+에어랩&geo=KR" target="_blank" onclick="event.stopPropagation()">
-          <div class="ci-dot" style="background:var(--green);"></div>
-          <div class="ci-text">Google 검색 <b>+18%</b> · 에어랩 신규 색상 출시 효과</div>
-        </a>
-        <span class="heat h-high">활동 HIGH</span>
-      </div>
-    </div>
-
-    <div class="comp-shell" onclick="openModal('samsung')">
-      <div class="comp-card">
-        <div class="comp-head">
-          <div class="comp-logo" style="background:var(--blue-bg);">🏠</div>
-          <div><div class="comp-name">삼성 비스포크</div><div class="comp-sub">가전 · 청소기</div></div>
-        </div>
-        <a class="ci" href="https://www.instagram.com/samsungkorea/" target="_blank" onclick="event.stopPropagation()">
-          <div class="ci-dot" style="background:var(--amber);"></div>
-          <div class="ci-text"><b>비스포크 AI 청소기</b> 여름 특가 캠페인. 인플루언서 콜라보</div>
-        </a>
-        <a class="ci" href="https://www.youtube.com/@SamsungKorea" target="_blank" onclick="event.stopPropagation()">
-          <div class="ci-dot" style="background:var(--amber);"></div>
-          <div class="ci-text"><b>월드컵 응원</b> 연계 가전 콘텐츠. 브랜드 감성 숏폼</div>
-        </a>
-        <a class="ci" href="https://trends.google.com/trends/explore?q=비스포크+청소기&geo=KR" target="_blank" onclick="event.stopPropagation()">
-          <div class="ci-dot" style="background:var(--green);"></div>
-          <div class="ci-text">검색량 안정세. 특가 시즌 전환 준비 포착</div>
-        </a>
-        <span class="heat h-mid">활동 MID</span>
-      </div>
-    </div>
-
-    <div class="comp-shell" onclick="openModal('lg')">
-      <div class="comp-card">
-        <div class="comp-head">
-          <div class="comp-logo" style="background:var(--purple-bg);">🔴</div>
-          <div><div class="comp-name">LG 코드제로</div><div class="comp-sub">무선청소기 직접 경쟁</div></div>
-        </div>
-        <a class="ci" href="https://www.instagram.com/lg_korea/" target="_blank" onclick="event.stopPropagation()">
-          <div class="ci-dot" style="background:var(--amber);"></div>
-          <div class="ci-text"><b>A9T 올인원</b> 영상 릴리즈. 청소 루틴 릴스 유도</div>
-        </a>
-        <a class="ci" href="https://www.youtube.com/@LGElectronicsKR" target="_blank" onclick="event.stopPropagation()">
-          <div class="ci-dot" style="background:var(--green);"></div>
-          <div class="ci-text"><b>홈케어 전문가</b> 콜라보 시리즈. 청소 노하우 자연 연결</div>
-        </a>
-        <a class="ci" href="https://trends.google.com/trends/explore?q=LG+코드제로&geo=KR" target="_blank" onclick="event.stopPropagation()">
-          <div class="ci-dot" style="background:var(--green);"></div>
-          <div class="ci-text">검색 <b>전주 -5%</b>. 신모델 발표 전 소강기</div>
-        </a>
-        <span class="heat h-mid">활동 MID</span>
-      </div>
-    </div>
-
-    <div class="comp-shell" onclick="openModal('tefal')">
-      <div class="comp-card">
-        <div class="comp-head">
-          <div class="comp-logo" style="background:var(--amber-bg);">🍳</div>
-          <div><div class="comp-name">Tefal · 쿠쿠</div><div class="comp-sub">주방가전 경쟁</div></div>
-        </div>
-        <a class="ci" href="https://www.instagram.com/tefal_korea/" target="_blank" onclick="event.stopPropagation()">
-          <div class="ci-dot" style="background:var(--green);"></div>
-          <div class="ci-text"><b>여름 간편 요리</b> 레시피 릴스. 에어프라이어 연계</div>
-        </a>
-        <a class="ci" href="https://www.youtube.com/results?search_query=쿠쿠+인덕션+레시피" target="_blank" onclick="event.stopPropagation()">
-          <div class="ci-dot" style="background:var(--green);"></div>
-          <div class="ci-text"><b>쿠쿠 인덕션</b> 레시피 유튜브 강세. 요리 인플루언서 협업</div>
-        </a>
-        <a class="ci" href="https://trends.google.com/trends/explore?q=에어프라이어+레시피&geo=KR" target="_blank" onclick="event.stopPropagation()">
-          <div class="ci-dot" style="background:var(--amber);"></div>
-          <div class="ci-text">에어프라이어 레시피 검색 <b>여름 시즌 상승 중</b>. Ninja 연계 가능</div>
-        </a>
-        <span class="heat h-low">활동 LOW</span>
-      </div>
-    </div>
-
-  </div><!-- /compGrid -->
-
-  <div class="footer" id="footer">
-    <span>🤖 Claude 자동화 시스템 · 매주 금요일 오전 9시 업데이트</span>
-    <span>데이터 정확도 <strong style="color:var(--amber);">추정</strong> · 웹 검색 기반</span>
   </div>
+
+  <div class="card c4" data-f="watch" data-kw="모니터링 스파이더맨 월드컵 선크림 스테이케이션" style="animation-delay:.2s">
+    <div class="ci">
+      <div class="clbl"><span class="chp" style="background:var(--blu-bg);color:var(--blue)">👁</span>다음 주 모니터링</div>
+      <div class="kwl">
+        <a class="kw" href="https://trends.google.com/trends/explore?q=스파이더맨+개봉&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">스파이더맨 개봉</span><span class="kwt">예측</span></a>
+        <a class="kw" href="https://trends.google.com/trends/explore?q=월드컵+16강&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">월드컵 16강</span><span class="kwt">예측</span></a>
+        <a class="kw" href="https://trends.google.com/trends/explore?q=여름+선크림&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">여름 선크림 추천</span><span class="kwt">파생</span></a>
+        <a class="kw" href="https://trends.google.com/trends/explore?q=스테이케이션&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">스테이케이션</span><span class="kwt">파생</span></a>
+        <a class="kw" href="https://trends.google.com/trends/explore?q=Hearts2Hearts&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">Hearts2Hearts 컴백</span><span class="kwt">예측</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty" id="empty"><p>검색 결과가 없습니다</p></div>
+</div>
+
+<!-- COMP -->
+<div class="sec-lbl" id="compSec">🔍 경쟁사 소셜 모니터링</div>
+<div class="cgrid">
+  <div class="csh" style="animation-delay:.05s" onclick="openM('dyson')">
+    <div class="cc">
+      <div class="ch"><div class="clogo" style="background:rgba(255,255,255,0.04)">💨</div><div><div class="cname">Dyson</div><div class="csub">공기청정 · 헤어케어</div></div></div>
+      <a class="cit" href="https://www.instagram.com/dyson_korea/" target="_blank" onclick="event.stopPropagation()"><div class="cdot" style="background:var(--red)"></div><div class="ctxt"><b>여름 헤어케어</b> 릴스 주 3회 발행 중</div></a>
+      <a class="cit" href="https://www.youtube.com/@DysonKorea" target="_blank" onclick="event.stopPropagation()"><div class="cdot" style="background:var(--amber)"></div><div class="ctxt"><b>공기청정기 냉방 시즌</b> 연계 숏폼</div></a>
+      <a class="cit" href="https://trends.google.com/trends/explore?q=다이슨+에어랩&geo=KR" target="_blank" onclick="event.stopPropagation()"><div class="cdot" style="background:var(--green)"></div><div class="ctxt">검색 <b>+18%</b> · 에어랩 신규 색상</div></a>
+      <span class="heat h-hi">활동 HIGH</span>
+    </div>
+  </div>
+  <div class="csh" style="animation-delay:.1s" onclick="openM('samsung')">
+    <div class="cc">
+      <div class="ch"><div class="clogo" style="background:var(--blu-bg)">🏠</div><div><div class="cname">삼성 비스포크</div><div class="csub">가전 · 청소기</div></div></div>
+      <a class="cit" href="https://www.instagram.com/samsungkorea/" target="_blank" onclick="event.stopPropagation()"><div class="cdot" style="background:var(--amber)"></div><div class="ctxt"><b>비스포크 AI 청소기</b> 여름 특가 캠페인</div></a>
+      <a class="cit" href="https://www.youtube.com/@SamsungKorea" target="_blank" onclick="event.stopPropagation()"><div class="cdot" style="background:var(--amber)"></div><div class="ctxt"><b>월드컵 응원</b> 연계 가전 숏폼</div></a>
+      <a class="cit" href="https://trends.google.com/trends/explore?q=비스포크+청소기&geo=KR" target="_blank" onclick="event.stopPropagation()"><div class="cdot" style="background:var(--green)"></div><div class="ctxt">검색량 안정세. 특가 시즌 전환 준비</div></a>
+      <span class="heat h-md">활동 MID</span>
+    </div>
+  </div>
+  <div class="csh" style="animation-delay:.15s" onclick="openM('lg')">
+    <div class="cc">
+      <div class="ch"><div class="clogo" style="background:var(--pur-bg)">🔴</div><div><div class="cname">LG 코드제로</div><div class="csub">무선청소기 직접 경쟁</div></div></div>
+      <a class="cit" href="https://www.instagram.com/lg_korea/" target="_blank" onclick="event.stopPropagation()"><div class="cdot" style="background:var(--amber)"></div><div class="ctxt"><b>A9T 올인원</b> 청소 루틴 릴스 유도</div></a>
+      <a class="cit" href="https://www.youtube.com/@LGElectronicsKR" target="_blank" onclick="event.stopPropagation()"><div class="cdot" style="background:var(--green)"></div><div class="ctxt"><b>홈케어 전문가</b> 콜라보 시리즈</div></a>
+      <a class="cit" href="https://trends.google.com/trends/explore?q=LG+코드제로&geo=KR" target="_blank" onclick="event.stopPropagation()"><div class="cdot" style="background:var(--green)"></div><div class="ctxt">검색 <b>전주 -5%</b>. 신모델 전 소강기</div></a>
+      <span class="heat h-md">활동 MID</span>
+    </div>
+  </div>
+  <div class="csh" style="animation-delay:.2s" onclick="openM('tefal')">
+    <div class="cc">
+      <div class="ch"><div class="clogo" style="background:var(--amb-bg)">🍳</div><div><div class="cname">Tefal · 쿠쿠</div><div class="csub">주방가전 경쟁</div></div></div>
+      <a class="cit" href="https://www.instagram.com/tefal_korea/" target="_blank" onclick="event.stopPropagation()"><div class="cdot" style="background:var(--green)"></div><div class="ctxt"><b>여름 간편 요리</b> 레시피 릴스</div></a>
+      <a class="cit" href="https://www.youtube.com/results?search_query=쿠쿠+인덕션+레시피" target="_blank" onclick="event.stopPropagation()"><div class="cdot" style="background:var(--green)"></div><div class="ctxt"><b>쿠쿠 인덕션</b> 레시피 유튜브 강세</div></a>
+      <a class="cit" href="https://trends.google.com/trends/explore?q=에어프라이어+레시피&geo=KR" target="_blank" onclick="event.stopPropagation()"><div class="cdot" style="background:var(--amber)"></div><div class="ctxt">에어프라이어 레시피 <b>여름 시즌 상승</b></div></a>
+      <span class="heat h-lo">활동 LOW</span>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span>🤖 Claude 자동화 · 매주 금요일 오전 9시 업데이트</span>
+  <span>데이터 정확도 <strong style="color:var(--amber)">추정</strong> · 웹 검색 기반</span>
+</div>
 
 </div><!-- /wrap -->
 
-<!-- ── Modal ── -->
-<div class="modal-bg" id="modalBg" onclick="closeModal(event)">
+<!-- MODAL -->
+<div class="mbg" id="mbg" onclick="closeMif(event)">
   <div class="modal" id="modal">
-    <div class="modal-header">
-      <div class="modal-icon" id="mIcon">🎵</div>
-      <div class="modal-title-wrap">
-        <div class="modal-eyebrow" id="mEyebrow">트렌드 상세</div>
-        <div class="modal-title" id="mTitle"></div>
-      </div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="mhd">
+      <div class="mico" id="mico">🎵</div>
+      <div class="mtw"><div class="mey" id="mey"></div><div class="mtit" id="mtit"></div></div>
+      <button class="mcls" onclick="closeM()">✕</button>
     </div>
-    <div class="modal-body">
-      <div class="modal-tags" id="mTags"></div>
-      <div class="modal-desc" id="mDesc"></div>
-      <div class="modal-section-title">콘텐츠 아이디어</div>
-      <div class="modal-ideas" id="mIdeas"></div>
-      <div class="modal-section-title" style="margin-bottom:10px;">레퍼런스 링크</div>
-      <div class="modal-links" id="mLinks"></div>
+    <div class="mbd">
+      <div class="mtags" id="mtags"></div>
+      <div class="mdesc" id="mdesc"></div>
+      <div class="mst">콘텐츠 아이디어</div>
+      <div class="mideas" id="mideas"></div>
+      <div class="mst" style="margin-bottom:9px">레퍼런스 링크</div>
+      <div class="mlinks" id="mlinks"></div>
     </div>
   </div>
 </div>
 
 <script>
-// ── Modal Data ──
-const MODALS = {
-  hearts: {
-    icon: '🎵', color: 'var(--red-bg)', eyebrow: '긴급 · K-POP',
-    title: 'Hearts2Hearts — Lemon Tang',
-    tags: [{t:'릴스',c:'t-blue'},{t:'언박싱',c:'t-blue'},{t:'K-POP',c:''},{t:'뷰티·라이프',c:''}],
-    desc: 'SM 신인 그룹 Hearts2Hearts의 신보 Lemon Tang이 발매 직후 급상승 중. 챌린지 편승 타이밍이 최고조에 달해 이번 주 내 발행이 필수입니다. 음원을 릴스 BGM으로 활용하거나 챌린지 포맷에 제품을 자연스럽게 노출시키는 방식이 효과적입니다.',
-    ideas: [
-      { t: '<b>릴스 챌린지 편승</b> — Lemon Tang BGM에 샤크닌자 청소 루틴 영상 제작. 경쾌한 리듬에 맞춰 청소 전/후 컷 전환' },
-      { t: '<b>언박싱 릴스</b> — 신제품 개봉 + 음원 조합. "새 앨범처럼 새 가전" 컨셉으로 팬덤 타겟' },
-      { t: '<b>카드뉴스</b> — "Hearts2Hearts가 추천하는 여름 홈케어 루틴" 컨셉 활용' },
-    ],
-    links: [
-      { text: 'Google Trends', url: 'https://trends.google.com/trends/explore?q=Hearts2Hearts&geo=KR' },
-      { text: 'YouTube', url: 'https://www.youtube.com/results?search_query=Hearts2Hearts+Lemon+Tang' },
-    ]
-  },
-  spider: {
-    icon: '🎬', color: 'var(--amber-bg)', eyebrow: '이번 주 활용',
-    title: '스파이더맨: 브랜드 뉴 데이',
-    tags: [{t:'카드뉴스',c:'t-purple'},{t:'패션·뷰티',c:''},{t:'영화',c:''}],
-    desc: '스파이더맨 신작 개봉 시즌. 검색 관심도 74점으로 꾸준한 상승세. New Arrival 소개나 "새로운 시작" 컨셉 캠페인에 자연스럽게 연결 가능.',
-    ideas: [
-      { t: '<b>카드뉴스</b> — "영웅도 선택하는 New Arrival" 컨셉. 신제품 라인업 소개에 영화 무드 접목' },
-      { t: '<b>릴스</b> — 스파이더맨 착지 효과음 + 제품 등장 장면 편집' },
-      { t: '<b>숏폼</b> — "Brand New Day, Brand New Clean" 카피로 여름 신제품 강조' },
-    ],
-    links: [
-      { text: 'Google Trends', url: 'https://trends.google.com/trends/explore?q=스파이더맨&geo=KR' },
-      { text: 'YouTube', url: 'https://www.youtube.com/results?search_query=스파이더맨+브랜드뉴데이' },
-    ]
-  },
-  summer: {
-    icon: '🏖️', color: 'var(--amber-bg)', eyebrow: '이번 주 활용',
-    title: '여름휴가 — 짧고 가깝게',
-    tags: [{t:'릴스',c:'t-purple'},{t:'라이프스타일',c:''},{t:'여름',c:'t-amber'}],
-    desc: '근거리 여행 및 스테이케이션 트렌드 상승. 장거리 대신 집과 주변을 특별하게 만드는 콘텐츠 포맷이 유효. 여름휴가 검색 관심도 68점.',
-    ideas: [
-      { t: '<b>릴스 vlog</b> — "집이 곧 리조트" 홈케어 루틴. 깨끗한 집 + 여름 음악 조합' },
-      { t: '<b>카드뉴스</b> — 스테이케이션 필수템 리스트에 샤크닌자 제품 포함' },
-      { t: '<b>숏폼</b> — 여름 청소 전/후 비포애프터. 여름 특유의 습하고 더운 환경 클리닝' },
-    ],
-    links: [
-      { text: 'Google Trends', url: 'https://trends.google.com/trends/explore?q=여름휴가&geo=KR' },
-      { text: 'Google Trends (스테이케이션)', url: 'https://trends.google.com/trends/explore?q=스테이케이션&geo=KR' },
-    ]
-  },
-  straykids: {
-    icon: '🎤', color: 'var(--amber-bg)', eyebrow: '이번 주 활용',
-    title: 'Stray Kids — RUN IT',
-    tags: [{t:'숏폼',c:'t-purple'},{t:'K-POP',c:''},{t:'스포츠',c:''}],
-    desc: 'Stray Kids 신보 RUN IT 발매. 역동적이고 강렬한 곡 분위기가 스포츠·퍼포먼스 제품 콘텐츠에 잘 어울림. 관심도 61점으로 팬덤 타겟 유효.',
-    ideas: [
-      { t: '<b>숏폼</b> — RUN IT BGM에 청소기 흡입력 퍼포먼스 영상. 강렬한 비트에 맞춰 강력한 흡입 장면' },
-      { t: '<b>릴스</b> — 팬덤 타겟 "응원 스타일로 청소하는 법" 유머 콘텐츠' },
-      { t: '<b>카드뉴스</b> — "RUN IT처럼 강력한 흡입력" 제품 스펙 소개 카피 활용' },
-    ],
-    links: [
-      { text: 'YouTube', url: 'https://www.youtube.com/results?search_query=Stray+Kids+RUN+IT' },
-      { text: 'Google Trends', url: 'https://trends.google.com/trends/explore?q=Stray+Kids&geo=KR' },
-    ]
-  },
-  uv: {
-    icon: '☀️', color: 'var(--amber-bg)', eyebrow: '이번 주 활용',
-    title: '자외선 차단 · 냉감 소재',
-    tags: [{t:'카드뉴스',c:'t-purple'},{t:'뷰티',c:''},{t:'여름',c:'t-amber'}],
-    desc: '여름 시즌 자외선 차단 및 냉감 관련 검색 55점으로 꾸준히 상승 중. 여름 가전과 연계한 실내 환경 개선 콘텐츠로 활용 가능.',
-    ideas: [
-      { t: '<b>카드뉴스</b> — "자외선보다 무서운 여름 집먼지" 에어 청정기 연계 에디토리얼' },
-      { t: '<b>릴스</b> — 냉감 소재 + 시원한 실내 공기 연계. 공기청정기 여름 활용법' },
-      { t: '<b>숏폼</b> — "여름 필수템 TOP5" 리스트에 샤크닌자 가전 자연스럽게 포함' },
-    ],
-    links: [
-      { text: 'Google Trends (냉감)', url: 'https://trends.google.com/trends/explore?q=냉감&geo=KR' },
-      { text: 'Google Trends (선크림)', url: 'https://trends.google.com/trends/explore?q=여름+선크림&geo=KR' },
-    ]
-  },
-  dyson: {
-    icon: '💨', color: 'rgba(255,255,255,0.06)', eyebrow: '경쟁사 · Dyson',
-    title: 'Dyson 이번 주 소셜 동향',
-    tags: [{t:'헤어케어',c:'t-red'},{t:'공기청정',c:'t-blue'},{t:'활동 HIGH',c:'t-red'}],
-    desc: '이번 주 다이슨은 여름 헤어케어 캠페인을 집중적으로 전개 중. 인스타그램 릴스 주 3회 이상 발행, Airwrap 신규 색상 출시와 맞물려 검색량 +18% 급상승. 대응 콘텐츠가 필요한 시점.',
-    ideas: [
-      { t: '<b>대응 포인트</b> — Dyson이 헤어케어에 집중하는 틈을 타 샤크닌자 청소·주방 영역 집중 공략' },
-      { t: '<b>차별화</b> — 가성비·성능 비교 콘텐츠로 다이슨 관심 소비자 전환 노려볼 것' },
-      { t: '<b>모니터링</b> — 에어랩 챌린지 해시태그 주시. 참여 유저 타겟팅 기회' },
-    ],
-    links: [
-      { text: 'Dyson Korea Instagram', url: 'https://www.instagram.com/dyson_korea/' },
-      { text: 'Dyson Korea YouTube', url: 'https://www.youtube.com/@DysonKorea' },
-      { text: 'Google Trends', url: 'https://trends.google.com/trends/explore?q=다이슨&geo=KR' },
-    ]
-  },
-  samsung: {
-    icon: '🏠', color: 'var(--blue-bg)', eyebrow: '경쟁사 · 삼성',
-    title: '삼성 비스포크 이번 주 동향',
-    tags: [{t:'청소기',c:'t-blue'},{t:'AI가전',c:'t-blue'},{t:'활동 MID',c:'t-amber'}],
-    desc: '비스포크 AI 청소기 여름 특가 캠페인 진행 중. 인플루언서 콜라보 확대. 월드컵 응원 연계 감성 숏폼도 발행. 전반적 활동량은 중간 수준.',
-    ideas: [
-      { t: '<b>대응 포인트</b> — AI 청소기 특가 타이밍에 샤크닌자 성능 비교 콘텐츠 투입' },
-      { t: '<b>월드컵 연계</b> — 삼성과 같은 월드컵 무드지만 더 직접적인 응원 현장 연계 콘텐츠' },
-      { t: '<b>인플루언서</b> — 삼성이 활용하는 인플루언서 팔로워 타겟 광고 고려' },
-    ],
-    links: [
-      { text: 'Samsung Korea Instagram', url: 'https://www.instagram.com/samsungkorea/' },
-      { text: 'Google Trends', url: 'https://trends.google.com/trends/explore?q=비스포크+청소기&geo=KR' },
-    ]
-  },
-  lg: {
-    icon: '🔴', color: 'var(--purple-bg)', eyebrow: '경쟁사 · LG',
-    title: 'LG 코드제로 이번 주 동향',
-    tags: [{t:'무선청소기',c:'t-purple'},{t:'직접 경쟁',c:'t-red'},{t:'활동 MID',c:'t-amber'}],
-    desc: 'LG 코드제로 A9T 올인원 타워 영상 릴리즈. 청소 루틴 릴스 유도 콘텐츠 강화 중. 검색량은 전주 대비 -5%로 신모델 발표 전 소강기로 보임.',
-    ideas: [
-      { t: '<b>공략 시점</b> — LG 검색 소강기인 지금이 샤크닌자 인지도 확보 최적 타이밍' },
-      { t: '<b>차별화</b> — 올인원 타워 대비 샤크닌자 가격 대비 성능 직접 비교 콘텐츠' },
-      { t: '<b>루틴 콘텐츠</b> — LG가 청소 루틴 포맷 사용 중이므로 더 재미있는 버전으로 차별화' },
-    ],
-    links: [
-      { text: 'LG Korea Instagram', url: 'https://www.instagram.com/lg_korea/' },
-      { text: 'LG Korea YouTube', url: 'https://www.youtube.com/@LGElectronicsKR' },
-      { text: 'Google Trends', url: 'https://trends.google.com/trends/explore?q=LG+코드제로&geo=KR' },
-    ]
-  },
-  tefal: {
-    icon: '🍳', color: 'var(--amber-bg)', eyebrow: '경쟁사 · Tefal·쿠쿠',
-    title: 'Tefal · 쿠쿠 이번 주 동향',
-    tags: [{t:'주방가전',c:'t-amber'},{t:'레시피',c:''},{t:'활동 LOW',c:'t-green'}],
-    desc: '테팔·쿠쿠 모두 여름 간편 요리 레시피 콘텐츠 위주로 운영. 에어프라이어 레시피 검색이 여름 시즌 상승 중. Ninja 브랜드와 직접 연계 가능한 포맷.',
-    ideas: [
-      { t: '<b>에어프라이어 레시피</b> — 테팔 대비 Ninja 에어프라이어 레시피 콘텐츠 강화. 여름 특별 레시피 시리즈' },
-      { t: '<b>쿠쿠 대응</b> — 인덕션 레시피 유튜브 강세에 맞서 Ninja 쿠킹 콘텐츠 투자' },
-      { t: '<b>기회</b> — 경쟁사 활동 LOW. 주방가전 카테고리에서 상대적으로 점유하기 쉬운 시점' },
-    ],
-    links: [
-      { text: 'Tefal Korea Instagram', url: 'https://www.instagram.com/tefal_korea/' },
-      { text: 'Google Trends (에어프라이어)', url: 'https://trends.google.com/trends/explore?q=에어프라이어+레시피&geo=KR' },
-    ]
-  },
+const MD = {
+  hearts:{icon:'🎵',bg:'var(--red-bg)',ey:'긴급 · K-POP',title:'Hearts2Hearts — Lemon Tang',
+    tags:[{l:'릴스',c:'t-b'},{l:'K-POP',c:''},{l:'긴급',c:'t-r'}],
+    desc:'SM 신인 그룹 Hearts2Hearts 신보 Lemon Tang 발매 직후 급상승. 챌린지 편승 타이밍이 최고조라 이번 주 내 발행이 필수입니다. 음원을 릴스 BGM으로 활용하거나 챌린지 포맷에 제품을 자연스럽게 노출하는 방식이 효과적.',
+    ideas:[{t:'<b>릴스 챌린지</b> — Lemon Tang BGM에 샤크닌자 청소 루틴. 경쾌한 리듬에 맞춰 청소 전/후 컷 전환'},
+           {t:'<b>언박싱 릴스</b> — 신제품 개봉 + 음원 조합. "새 앨범처럼 새 가전" 컨셉 팬덤 타겟'},
+           {t:'<b>카드뉴스</b> — "Hearts2Hearts가 추천하는 여름 홈케어 루틴" 컨셉'}],
+    links:[{t:'Google Trends',u:'https://trends.google.com/trends/explore?q=Hearts2Hearts&geo=KR'},
+           {t:'YouTube',u:'https://www.youtube.com/results?search_query=Hearts2Hearts+Lemon+Tang'}]},
+  spider:{icon:'🎬',bg:'var(--amb-bg)',ey:'이번 주 활용 · 영화',title:'스파이더맨: 브랜드 뉴 데이',
+    tags:[{l:'카드뉴스',c:'t-p'},{l:'패션·뷰티',c:''},{l:'영화',c:''}],
+    desc:'스파이더맨 신작 개봉 시즌. 관심도 74점으로 상승세. "New Arrival·새로운 시작" 컨셉 캠페인에 자연스럽게 연결 가능.',
+    ideas:[{t:'<b>카드뉴스</b> — "영웅도 선택하는 New Arrival" 컨셉. 신제품 라인업 소개'},
+           {t:'<b>릴스</b> — 스파이더맨 착지 효과음 + 제품 등장 장면 편집'},
+           {t:'<b>숏폼</b> — "Brand New Day, Brand New Clean" 카피로 신제품 강조'}],
+    links:[{t:'Google Trends',u:'https://trends.google.com/trends/explore?q=스파이더맨&geo=KR'},
+           {t:'YouTube',u:'https://www.youtube.com/results?search_query=스파이더맨+브랜드뉴데이'}]},
+  summer:{icon:'🏖️',bg:'var(--amb-bg)',ey:'이번 주 활용 · 라이프스타일',title:'여름휴가 — 짧고 가깝게',
+    tags:[{l:'릴스',c:'t-p'},{l:'라이프스타일',c:''},{l:'여름',c:'t-a'}],
+    desc:'근거리 여행 및 스테이케이션 트렌드 상승. 집과 주변을 특별하게 만드는 홈케어 콘텐츠 포맷이 유효. 관심도 68점.',
+    ideas:[{t:'<b>릴스 vlog</b> — "집이 곧 리조트" 홈케어 루틴. 깨끗한 집 + 여름 음악'},
+           {t:'<b>카드뉴스</b> — 스테이케이션 필수템 리스트에 샤크닌자 제품 포함'},
+           {t:'<b>숏폼</b> — 여름 청소 비포애프터. 습하고 더운 환경 클리닝'}],
+    links:[{t:'Google Trends (여름휴가)',u:'https://trends.google.com/trends/explore?q=여름휴가&geo=KR'},
+           {t:'Google Trends (스테이케이션)',u:'https://trends.google.com/trends/explore?q=스테이케이션&geo=KR'}]},
+  straykids:{icon:'🎤',bg:'var(--amb-bg)',ey:'이번 주 활용 · K-POP',title:'Stray Kids — RUN IT',
+    tags:[{l:'숏폼',c:'t-p'},{l:'K-POP',c:''},{l:'스포츠',c:''}],
+    desc:'Stray Kids 신보 RUN IT 발매. 역동적·강렬한 곡 분위기가 퍼포먼스 제품 콘텐츠에 잘 어울림. 관심도 61점.',
+    ideas:[{t:'<b>숏폼</b> — RUN IT BGM에 청소기 흡입력 퍼포먼스 영상. 강렬한 비트에 맞춘 흡입 장면'},
+           {t:'<b>릴스</b> — 팬덤 타겟 "응원 스타일로 청소하는 법" 유머 콘텐츠'},
+           {t:'<b>카드뉴스</b> — "RUN IT처럼 강력한 흡입력" 스펙 소개'}],
+    links:[{t:'YouTube',u:'https://www.youtube.com/results?search_query=Stray+Kids+RUN+IT'},
+           {t:'Google Trends',u:'https://trends.google.com/trends/explore?q=Stray+Kids&geo=KR'}]},
+  uv:{icon:'☀️',bg:'var(--amb-bg)',ey:'이번 주 활용 · 뷰티',title:'자외선 차단 · 냉감 소재',
+    tags:[{l:'카드뉴스',c:'t-p'},{l:'뷰티',c:''},{l:'여름',c:'t-a'}],
+    desc:'여름 자외선 차단·냉감 관련 검색 55점으로 꾸준히 상승. 여름 가전과 연계한 실내 환경 개선 콘텐츠로 활용 가능.',
+    ideas:[{t:'<b>카드뉴스</b> — "자외선보다 무서운 여름 집먼지" 공기청정기 연계 에디토리얼'},
+           {t:'<b>릴스</b> — 냉감 소재 + 시원한 실내 공기 연계. 공기청정기 여름 활용법'},
+           {t:'<b>숏폼</b> — "여름 필수템 TOP5" 리스트에 샤크닌자 자연스럽게 포함'}],
+    links:[{t:'Google Trends (냉감)',u:'https://trends.google.com/trends/explore?q=냉감&geo=KR'},
+           {t:'Google Trends (선크림)',u:'https://trends.google.com/trends/explore?q=여름+선크림&geo=KR'}]},
+  dyson:{icon:'💨',bg:'rgba(255,255,255,0.05)',ey:'경쟁사 · Dyson',title:'Dyson 이번 주 소셜 동향',
+    tags:[{l:'헤어케어',c:'t-r'},{l:'공기청정',c:'t-b'},{l:'활동 HIGH',c:'t-r'}],
+    desc:'이번 주 다이슨은 여름 헤어케어 캠페인을 집중 전개 중. 릴스 주 3회 이상 발행, Airwrap 신규 색상 출시와 맞물려 검색량 +18% 급상승. 대응 콘텐츠가 필요한 시점.',
+    ideas:[{t:'<b>대응 포인트</b> — 다이슨이 헤어케어에 집중하는 틈을 타 샤크닌자 청소·주방 영역 공략'},
+           {t:'<b>차별화</b> — 가성비·성능 비교 콘텐츠로 다이슨 관심 소비자 전환'},
+           {t:'<b>모니터링</b> — 에어랩 챌린지 해시태그 주시. 참여 유저 타겟팅 기회'}],
+    links:[{t:'Dyson Korea IG',u:'https://www.instagram.com/dyson_korea/'},
+           {t:'Dyson Korea YT',u:'https://www.youtube.com/@DysonKorea'},
+           {t:'Google Trends',u:'https://trends.google.com/trends/explore?q=다이슨&geo=KR'}]},
+  samsung:{icon:'🏠',bg:'var(--blu-bg)',ey:'경쟁사 · 삼성',title:'삼성 비스포크 이번 주 동향',
+    tags:[{l:'청소기',c:'t-b'},{l:'AI가전',c:'t-b'},{l:'활동 MID',c:'t-a'}],
+    desc:'비스포크 AI 청소기 여름 특가 캠페인 중. 인플루언서 콜라보 확대. 월드컵 응원 연계 감성 숏폼도 발행.',
+    ideas:[{t:'<b>대응</b> — 삼성 특가 타이밍에 샤크닌자 성능 비교 콘텐츠 투입'},
+           {t:'<b>월드컵 연계</b> — 같은 무드지만 더 직접적인 응원 현장 연계 콘텐츠'},
+           {t:'<b>인플루언서</b> — 삼성 활용 인플루언서 팔로워 타겟 광고 고려'}],
+    links:[{t:'Samsung Korea IG',u:'https://www.instagram.com/samsungkorea/'},
+           {t:'Google Trends',u:'https://trends.google.com/trends/explore?q=비스포크+청소기&geo=KR'}]},
+  lg:{icon:'🔴',bg:'var(--pur-bg)',ey:'경쟁사 · LG',title:'LG 코드제로 이번 주 동향',
+    tags:[{l:'무선청소기',c:'t-p'},{l:'직접 경쟁',c:'t-r'},{l:'활동 MID',c:'t-a'}],
+    desc:'LG 코드제로 A9T 올인원 영상 릴리즈. 청소 루틴 릴스 유도 중. 검색량 전주 대비 -5%로 신모델 발표 전 소강기.',
+    ideas:[{t:'<b>공략 시점</b> — LG 검색 소강기인 지금이 샤크닌자 인지도 확보 최적 타이밍'},
+           {t:'<b>차별화</b> — 올인원 타워 대비 가격 대비 성능 직접 비교 콘텐츠'},
+           {t:'<b>루틴 콘텐츠</b> — LG가 청소 루틴 포맷 사용 중이므로 더 재미있는 버전으로 차별화'}],
+    links:[{t:'LG Korea IG',u:'https://www.instagram.com/lg_korea/'},
+           {t:'Google Trends',u:'https://trends.google.com/trends/explore?q=LG+코드제로&geo=KR'}]},
+  tefal:{icon:'🍳',bg:'var(--amb-bg)',ey:'경쟁사 · Tefal·쿠쿠',title:'Tefal · 쿠쿠 이번 주 동향',
+    tags:[{l:'주방가전',c:'t-a'},{l:'레시피',c:''},{l:'활동 LOW',c:''}],
+    desc:'테팔·쿠쿠 모두 여름 간편 요리 레시피 콘텐츠 위주 운영. 에어프라이어 레시피 검색 여름 시즌 상승 중. Ninja 브랜드와 직접 연계 가능.',
+    ideas:[{t:'<b>에어프라이어 레시피</b> — 테팔 대비 Ninja 레시피 콘텐츠 강화. 여름 특별 레시피 시리즈'},
+           {t:'<b>쿠쿠 대응</b> — 인덕션 레시피 유튜브 강세에 맞서 Ninja 쿠킹 콘텐츠 투자'},
+           {t:'<b>기회</b> — 경쟁사 활동 LOW. 주방가전 카테고리 점유 최적 시점'}],
+    links:[{t:'Tefal Korea IG',u:'https://www.instagram.com/tefal_korea/'},
+           {t:'Google Trends',u:'https://trends.google.com/trends/explore?q=에어프라이어+레시피&geo=KR'}]},
+  soon:{icon:'🟡',bg:'var(--amb-bg)',ey:'이번 주~다음 주',title:'이번 주~다음 주 활용 트렌드',
+    tags:[{l:'카드뉴스',c:'t-p'},{l:'릴스',c:'t-p'},{l:'숏폼',c:'t-p'}],
+    desc:'스파이더맨 개봉, 여름휴가, Stray Kids, 냉감 소재 — 이번 주부터 다음 주까지 활용 가능한 소재들입니다. 각 카드를 개별 클릭하면 상세 아이디어를 볼 수 있습니다.',
+    ideas:[{t:'<b>스파이더맨</b> — New Arrival 컨셉 카드뉴스'},
+           {t:'<b>여름휴가</b> — 스테이케이션 홈케어 릴스'},
+           {t:'<b>Stray Kids</b> — 강력한 흡입력 퍼포먼스 숏폼'}],
+    links:[{t:'Google Trends KR',u:'https://trends.google.com/trends/trendingsearches/daily?geo=KR'}]}
 };
 
-// ── Modal ──
-function openModal(key) {
-  const d = MODALS[key]; if(!d) return;
-  document.getElementById('mIcon').textContent = d.icon;
-  document.getElementById('mIcon').style.background = d.color;
-  document.getElementById('mEyebrow').textContent = d.eyebrow;
-  document.getElementById('mTitle').textContent = d.title;
-  document.getElementById('mDesc').textContent = d.desc;
-  document.getElementById('mTags').innerHTML = d.tags.map(t=>`<span class="tag ${t.c}">${t.t}</span>`).join('');
-  document.getElementById('mIdeas').innerHTML = d.ideas.map((item,i)=>`<div class="idea-item"><div class="idea-num">${String(i+1).padStart(2,'0')}</div><div class="idea-text">${item.t}</div></div>`).join('');
-  document.getElementById('mLinks').innerHTML = d.links.map(l=>`<a class="modal-link" href="${l.url}" target="_blank">${l.text} <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a>`).join('');
-  document.getElementById('modalBg').classList.add('open');
-  document.body.style.overflow = 'hidden';
+function openM(k){
+  const d=MD[k]; if(!d) return;
+  document.getElementById('mico').textContent=d.icon;
+  document.getElementById('mico').style.background=d.bg;
+  document.getElementById('mey').textContent=d.ey;
+  document.getElementById('mtit').textContent=d.title;
+  document.getElementById('mdesc').textContent=d.desc;
+  document.getElementById('mtags').innerHTML=d.tags.map(t=>`<span class="tag ${t.c}">${t.l}</span>`).join('');
+  document.getElementById('mideas').innerHTML=d.ideas.map((x,i)=>`<div class="idea"><div class="inum">${String(i+1).padStart(2,'0')}</div><div class="itxt">${x.t}</div></div>`).join('');
+  document.getElementById('mlinks').innerHTML=d.links.map(l=>`<a class="mlink" href="${l.u}" target="_blank">${l.t} <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a>`).join('');
+  document.getElementById('mbg').classList.add('open');
+  document.body.style.overflow='hidden';
 }
-function closeModal(e) {
-  if(e && e.target !== document.getElementById('modalBg')) return;
-  document.getElementById('modalBg').classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', e => { if(e.key==='Escape') { document.getElementById('modalBg').classList.remove('open'); document.body.style.overflow=''; }});
+function closeM(){document.getElementById('mbg').classList.remove('open');document.body.style.overflow='';}
+function closeMif(e){if(e.target===document.getElementById('mbg'))closeM();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM();});
 
-// ── Filter & Search ──
-let activeFilter = 'all';
-function setFilter(f, btn) {
-  activeFilter = f;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  applyFilters();
+let activeF='all';
+function setF(f,btn){
+  activeF=f;
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  applyFilter();
 }
-function applyFilters() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const cards = document.querySelectorAll('#trendGrid .tc-shell');
-  let visible = 0;
-  cards.forEach(card => {
-    const f = card.dataset.filter || 'all';
-    const kw = (card.dataset.keywords || '').toLowerCase();
-    const text = card.textContent.toLowerCase();
-    const filterOk = activeFilter === 'all' || f === activeFilter;
-    const searchOk = !q || text.includes(q) || kw.includes(q);
-    const show = filterOk && searchOk;
-    card.style.display = show ? '' : 'none';
-    if(show) visible++;
+function applyFilter(){
+  const q=document.getElementById('srch').value.toLowerCase();
+  let vis=0;
+  document.querySelectorAll('#trendGrid .card').forEach(c=>{
+    const f=c.dataset.f||'all';
+    const kw=(c.dataset.kw||'').toLowerCase();
+    const txt=c.textContent.toLowerCase();
+    const ok=(activeF==='all'||f===activeF)&&(!q||txt.includes(q)||kw.includes(q));
+    c.style.display=ok?'':'none';
+    if(ok)vis++;
   });
-  document.getElementById('emptyState').classList.toggle('show', visible === 0);
+  document.getElementById('empty').classList.toggle('show',vis===0);
 }
 
-// ── Nav Section Toggle ──
-function navTo(section, btn) {
-  document.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  if(section === 'trends') {
-    document.getElementById('trendGrid').scrollIntoView({behavior:'smooth', block:'start'});
-  } else if(section === 'comp') {
-    document.getElementById('compLabel').scrollIntoView({behavior:'smooth', block:'start'});
-  }
+function scrollTo(sel,btn,sec){
+  document.querySelectorAll('.npill').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelector(sel).scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-// ── Bar Chart Animation ──
-function animateBars() {
-  document.querySelectorAll('.bar-fill').forEach(bar => {
-    const w = bar.dataset.w;
-    bar.style.width = w + '%';
-  });
-}
-
-// ── Intersection Observer ──
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((entry, idx) => {
-    if(entry.isIntersecting) {
-      const el = entry.target;
-      const delay = (el.dataset.delay || 0);
-      setTimeout(() => el.classList.add('visible'), delay);
-      io.unobserve(el);
-      if(el.id === 'barChart' || el.closest('#barChart')) animateBars();
-    }
-  });
-}, { threshold: 0.08 });
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Observe hero, controls, stats
-  ['hero','controls','statsRow','compLabel','footer'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) io.observe(el);
-  });
-
-  // Observe trend cards with staggered delay
-  document.querySelectorAll('.tc-shell').forEach((el, i) => {
-    el.dataset.delay = i * 80;
-    io.observe(el);
-  });
-
-  // Observe comp cards with stagger
-  document.querySelectorAll('.comp-shell').forEach((el, i) => {
-    el.dataset.delay = i * 70;
-    io.observe(el);
-  });
-
-  // Animate bars when chart card is visible
-  const barCard = document.querySelector('.tc-shell[data-keywords*="관심도"]');
-  if(barCard) {
-    const barIo = new IntersectionObserver(entries => {
-      if(entries[0].isIntersecting) { animateBars(); barIo.disconnect(); }
-    }, { threshold: 0.2 });
-    barIo.observe(barCard);
-  }
+// Bar animation
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.querySelectorAll('.bfil').forEach(b=>{b.style.width=b.dataset.w+'%';});
+  },400);
 });
 </script>
 </body>
