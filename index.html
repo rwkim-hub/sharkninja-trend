@@ -102,10 +102,28 @@ h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
 .card{background:rgba(255,255,255,0.02);border:1px solid var(--bd);border-radius:22px;padding:2px;cursor:pointer;transition:border-color .35s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease);animation:fadeUp .8s var(--ease) both}
 .card:hover{border-color:var(--bdh);transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,0.4)}
 .ci{background:var(--bg1);border-radius:20px;padding:22px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);height:100%}
+.ci-nopad{background:var(--bg1);border-radius:20px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);height:100%;overflow:hidden}
 .c7{grid-column:span 7} .c5{grid-column:span 5} .c8{grid-column:span 8} .c4{grid-column:span 4} .c12{grid-column:span 12}
 
 .clbl{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);margin-bottom:18px;display:flex;align-items:center;gap:8px}
 .chp{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px}
+
+/* VISUAL CAROUSEL */
+.vcarousel{position:relative;height:200px;overflow:hidden;border-radius:18px 18px 0 0}
+.vslide{position:absolute;inset:0;opacity:0;transition:opacity .8s var(--ease);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.vslide.active{opacity:1}
+.vslide-emoji{font-size:52px;line-height:1;filter:drop-shadow(0 4px 24px rgba(0,0,0,0.4))}
+.vslide-kw{font-size:18px;font-weight:800;letter-spacing:-.02em;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.6);text-align:center;padding:0 20px}
+.vslide-src{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:2px}
+.vdots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:2}
+.vdot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.25);transition:all .4s var(--ease)}
+.vdot.on{background:#fff;width:14px;border-radius:999px}
+.vcard-body{padding:18px 20px 20px}
+
+/* mini carousel for 2-col grid */
+.vcarousel-sm{height:130px}
+.vcarousel-sm .vslide-emoji{font-size:36px}
+.vcarousel-sm .vslide-kw{font-size:14px}
 
 /* TREND ITEM */
 .ti{display:flex;align-items:flex-start;gap:12px;padding:13px 14px;background:var(--bg2);border:1px solid var(--bd);border-radius:13px;margin-bottom:8px;transition:border-color .25s var(--ease),background .25s var(--ease)}
@@ -270,38 +288,75 @@ h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
 <!-- TREND GRID -->
 <div class="tgrid" id="trendGrid">
 
-  <div class="card c7" data-f="urgent" data-kw="hearts2hearts lemon tang sm 케이팝 kpop 릴스 챌린지" style="animation-delay:.05s" onclick="openM('hearts')">
-    <div class="ci">
-      <div class="clbl"><span class="chp" style="background:var(--red-bg);color:var(--red)">⚡</span>긴급 — 이번 주 반드시 활용</div>
-      <div class="ti">
-        <div class="tico" style="background:var(--red-bg)">🎵</div>
-        <div class="tb">
-          <div class="trow">
-            <div class="ttl">Hearts2Hearts — Lemon Tang</div>
-            <a class="ext" href="https://trends.google.com/trends/explore?q=Hearts2Hearts&geo=KR" target="_blank" onclick="event.stopPropagation()">Google <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a>
-            <a class="ext" href="https://www.youtube.com/results?search_query=Hearts2Hearts+Lemon+Tang" target="_blank" onclick="event.stopPropagation()">YouTube <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a>
-          </div>
-          <div class="tdesc">SM 신인 그룹 신보 발매 직후. 챌린지 편승 타이밍 최고조. 릴스 제품 루틴 + 음원 활용 추천.</div>
-          <div class="tags"><span class="tag t-b">릴스</span><span class="tag t-b">언박싱</span><span class="tag">K-POP</span><span class="tag">뷰티·라이프</span></div>
+  <!-- 긴급: Hearts2Hearts -->
+  <div class="card c4" data-f="urgent" data-kw="hearts2hearts lemon tang sm kpop 릴스 챌린지" style="animation-delay:.05s" onclick="openM('hearts')">
+    <div class="ci-nopad">
+      <div class="vcarousel" id="vc-hearts">
+        <div class="vslide active" style="background:linear-gradient(135deg,#1a0030 0%,#6b0f8a 50%,#ff2d9b 100%)">
+          <div class="vslide-emoji">🎵</div>
+          <div class="vslide-kw">Hearts2Hearts</div>
+          <div class="vslide-src">Lemon Tang · K-POP</div>
         </div>
+        <div class="vslide" style="background:linear-gradient(135deg,#0d001a 0%,#3d0066 50%,#c026d3 100%)">
+          <div class="vslide-emoji">💜</div>
+          <div class="vslide-kw">챌린지 타이밍</div>
+          <div class="vslide-src">SM Entertainment</div>
+        </div>
+        <div class="vslide" style="background:linear-gradient(135deg,#1a0040 0%,#7c3aed 60%,#f0abfc 100%)">
+          <div class="vslide-emoji">📱</div>
+          <div class="vslide-kw">릴스 BGM 활용</div>
+          <div class="vslide-src">관심도 92점 · 긴급</div>
+        </div>
+        <div class="vdots"><span class="vdot on"></span><span class="vdot"></span><span class="vdot"></span></div>
       </div>
-      <div class="ti">
-        <div class="tico" style="background:var(--red-bg)">⚽</div>
-        <div class="tb">
-          <div class="trow">
-            <div class="ttl">FIFA 월드컵 2026</div>
-            <a class="ext" href="https://trends.google.com/trends/explore?q=FIFA+월드컵+2026&geo=KR" target="_blank" onclick="event.stopPropagation()">Google <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a>
-          </div>
-          <div class="tdesc">응원 관련 검색 급상승. 경기 전후 발행 필수. 숏폼으로 응원 분위기 + 제품 자연 노출.</div>
-          <div class="tags"><span class="tag t-b">숏폼</span><span class="tag">스포츠</span><span class="tag">식음료</span></div>
+      <div class="vcard-body">
+        <div class="clbl"><span class="chp" style="background:var(--red-bg);color:var(--red)">⚡</span>긴급 · 이번 주 必</div>
+        <div class="tdesc" style="margin-bottom:10px">SM 신인 그룹 신보 발매 직후. 챌린지 편승 타이밍 최고조. 릴스 루틴 + 음원 활용 추천.</div>
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+          <div class="tags"><span class="tag t-b">릴스</span><span class="tag t-b">언박싱</span><span class="tag">K-POP</span></div>
+          <a class="ext" style="margin-left:auto" href="https://trends.google.com/trends/explore?q=Hearts2Hearts&geo=KR" target="_blank" onclick="event.stopPropagation()">Google <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a>
+          <a class="ext" href="https://www.youtube.com/results?search_query=Hearts2Hearts+Lemon+Tang" target="_blank" onclick="event.stopPropagation()">YT <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="card c5" data-f="all" data-kw="관심도 차트 점수" style="animation-delay:.1s" onclick="event.stopPropagation()">
+  <!-- 긴급: FIFA -->
+  <div class="card c4" data-f="urgent" data-kw="fifa 월드컵 2026 한국 숏폼 스포츠" style="animation-delay:.1s" onclick="openM('hearts')">
+    <div class="ci-nopad">
+      <div class="vcarousel" id="vc-fifa">
+        <div class="vslide active" style="background:linear-gradient(135deg,#003d1a 0%,#006627 50%,#00b341 100%)">
+          <div class="vslide-emoji">⚽</div>
+          <div class="vslide-kw">FIFA 월드컵 2026</div>
+          <div class="vslide-src">한국 경기 · 응원 시즌</div>
+        </div>
+        <div class="vslide" style="background:linear-gradient(135deg,#001a33 0%,#003d7a 50%,#0066cc 100%)">
+          <div class="vslide-emoji">🇰🇷</div>
+          <div class="vslide-kw">대한민국 파이팅</div>
+          <div class="vslide-src">Google Trends KR</div>
+        </div>
+        <div class="vslide" style="background:linear-gradient(135deg,#1a0000 0%,#7a0000 50%,#cc2200 100%)">
+          <div class="vslide-emoji">🔥</div>
+          <div class="vslide-kw">검색량 급상승</div>
+          <div class="vslide-src">관심도 88점 · 긴급</div>
+        </div>
+        <div class="vdots"><span class="vdot on"></span><span class="vdot"></span><span class="vdot"></span></div>
+      </div>
+      <div class="vcard-body">
+        <div class="clbl"><span class="chp" style="background:var(--red-bg);color:var(--red)">⚡</span>긴급 · 경기 전후 발행</div>
+        <div class="tdesc" style="margin-bottom:10px">응원 관련 검색 급상승. 경기 전후 발행 필수. 숏폼으로 응원 분위기 + 제품 자연 노출.</div>
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+          <div class="tags"><span class="tag t-b">숏폼</span><span class="tag">스포츠</span><span class="tag">식음료</span></div>
+          <a class="ext" style="margin-left:auto" href="https://trends.google.com/trends/explore?q=FIFA+월드컵+2026&geo=KR" target="_blank" onclick="event.stopPropagation()">Google <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 관심도 차트 -->
+  <div class="card c4" data-f="all" data-kw="관심도 차트 점수" style="animation-delay:.15s">
     <div class="ci">
-      <div class="clbl"><span class="chp" style="background:var(--pur-bg);color:var(--purple)">📊</span>트렌드 관심도 점수</div>
+      <div class="clbl"><span class="chp" style="background:var(--pur-bg);color:var(--purple)">📊</span>트렌드 관심도</div>
       <div class="bars">
         <div class="brow"><div class="blbl">Hearts2Hearts</div><div class="btrk"><div class="bfil" data-w="92" style="background:var(--red)"></div></div><div class="bval">92</div></div>
         <div class="brow"><div class="blbl">FIFA 월드컵</div><div class="btrk"><div class="bfil" data-w="88" style="background:var(--red)"></div></div><div class="bval">88</div></div>
@@ -313,50 +368,103 @@ h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
     </div>
   </div>
 
-  <div class="card c8" data-f="soon" data-kw="스파이더맨 여름휴가 stray kids 냉감 카드뉴스 릴스 숏폼" style="animation-delay:.15s" onclick="openM('soon')">
-    <div class="ci">
-      <div class="clbl"><span class="chp" style="background:var(--amb-bg);color:var(--amber)">🟡</span>이번 주~다음 주 활용 가능</div>
-      <div class="sub2">
-        <div class="ti" style="margin-bottom:0" onclick="event.stopPropagation();openM('spider')">
-          <div class="tico" style="background:var(--amb-bg)">🎬</div>
-          <div class="tb">
-            <div class="trow"><div class="ttl">스파이더맨: 브랜드 뉴 데이</div><a class="ext" href="https://trends.google.com/trends/explore?q=스파이더맨&geo=KR" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a></div>
-            <div class="tdesc">카드뉴스: New Arrival 소개 포맷</div>
-            <div class="tags"><span class="tag t-p">카드뉴스</span><span class="tag">패션·뷰티</span></div>
-          </div>
+  <!-- 스파이더맨 -->
+  <div class="card c3" data-f="soon" data-kw="스파이더맨 브랜드뉴데이 카드뉴스" style="animation-delay:.2s;grid-column:span 3" onclick="openM('spider')">
+    <div class="ci-nopad">
+      <div class="vcarousel vcarousel-sm" id="vc-spider">
+        <div class="vslide active" style="background:linear-gradient(135deg,#1a0000 0%,#8b0000 40%,#1a00cc 100%)">
+          <div class="vslide-emoji">🕷️</div>
+          <div class="vslide-kw">스파이더맨</div>
+          <div class="vslide-src">Brand New Day</div>
         </div>
-        <div class="ti" style="margin-bottom:0" onclick="event.stopPropagation();openM('summer')">
-          <div class="tico" style="background:var(--amb-bg)">🏖️</div>
-          <div class="tb">
-            <div class="trow"><div class="ttl">여름휴가 — 짧고 가깝게</div><a class="ext" href="https://trends.google.com/trends/explore?q=여름휴가&geo=KR" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a></div>
-            <div class="tdesc">릴스: 근거리 여행 vlog 포맷</div>
-            <div class="tags"><span class="tag t-p">릴스</span><span class="tag">라이프스타일</span></div>
-          </div>
+        <div class="vslide" style="background:linear-gradient(135deg,#000d33 0%,#0033cc 50%,#cc0000 100%)">
+          <div class="vslide-emoji">🎬</div>
+          <div class="vslide-kw">New Arrival</div>
+          <div class="vslide-src">카드뉴스 포맷</div>
         </div>
-        <div class="ti" style="margin-bottom:0" onclick="event.stopPropagation();openM('straykids')">
-          <div class="tico" style="background:var(--amb-bg)">🎤</div>
-          <div class="tb">
-            <div class="trow"><div class="ttl">Stray Kids — RUN IT</div><a class="ext" href="https://www.youtube.com/results?search_query=Stray+Kids+RUN+IT" target="_blank" onclick="event.stopPropagation()">YT <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a></div>
-            <div class="tdesc">숏폼: 역동적 제품 역량 강조</div>
-            <div class="tags"><span class="tag t-p">숏폼</span><span class="tag">스포츠</span></div>
-          </div>
-        </div>
-        <div class="ti" style="margin-bottom:0" onclick="event.stopPropagation();openM('uv')">
-          <div class="tico" style="background:var(--amb-bg)">☀️</div>
-          <div class="tb">
-            <div class="trow"><div class="ttl">자외선 차단 · 냉감 소재</div><a class="ext" href="https://trends.google.com/trends/explore?q=냉감&geo=KR" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8.5l7-7M4 1.5h4.5v4.5"/></svg></a></div>
-            <div class="tdesc">카드뉴스: SPF 제품 올바른 사용법</div>
-            <div class="tags"><span class="tag t-p">카드뉴스</span><span class="tag">뷰티</span></div>
-          </div>
-        </div>
+        <div class="vdots"><span class="vdot on"></span><span class="vdot"></span></div>
+      </div>
+      <div class="vcard-body">
+        <div class="tdesc" style="font-size:11px;margin-bottom:8px">카드뉴스: New Arrival 소개 포맷 활용</div>
+        <div class="tags"><span class="tag t-p">카드뉴스</span></div>
       </div>
     </div>
   </div>
 
-  <div class="card c4" data-f="watch" data-kw="모니터링 스파이더맨 월드컵 선크림 스테이케이션" style="animation-delay:.2s">
+  <!-- 여름휴가 -->
+  <div class="card c3" data-f="soon" data-kw="여름휴가 스테이케이션 릴스" style="animation-delay:.25s;grid-column:span 3" onclick="openM('summer')">
+    <div class="ci-nopad">
+      <div class="vcarousel vcarousel-sm" id="vc-summer">
+        <div class="vslide active" style="background:linear-gradient(135deg,#1a0d00 0%,#c2410c 50%,#fbbf24 100%)">
+          <div class="vslide-emoji">🏖️</div>
+          <div class="vslide-kw">여름휴가</div>
+          <div class="vslide-src">짧고 가깝게</div>
+        </div>
+        <div class="vslide" style="background:linear-gradient(135deg,#001a33 0%,#0ea5e9 60%,#38bdf8 100%)">
+          <div class="vslide-emoji">🌊</div>
+          <div class="vslide-kw">스테이케이션</div>
+          <div class="vslide-src">릴스 vlog 포맷</div>
+        </div>
+        <div class="vdots"><span class="vdot on"></span><span class="vdot"></span></div>
+      </div>
+      <div class="vcard-body">
+        <div class="tdesc" style="font-size:11px;margin-bottom:8px">릴스: 근거리 여행 vlog 포맷</div>
+        <div class="tags"><span class="tag t-p">릴스</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stray Kids -->
+  <div class="card c3" data-f="soon" data-kw="stray kids run it 숏폼" style="animation-delay:.3s;grid-column:span 3" onclick="openM('straykids')">
+    <div class="ci-nopad">
+      <div class="vcarousel vcarousel-sm" id="vc-sk">
+        <div class="vslide active" style="background:linear-gradient(135deg,#0a0a0a 0%,#1f1f1f 40%,#dc2626 100%)">
+          <div class="vslide-emoji">🎤</div>
+          <div class="vslide-kw">Stray Kids</div>
+          <div class="vslide-src">RUN IT</div>
+        </div>
+        <div class="vslide" style="background:linear-gradient(135deg,#0f0f0f 0%,#7f1d1d 50%,#f87171 100%)">
+          <div class="vslide-emoji">🔥</div>
+          <div class="vslide-kw">역동적 퍼포먼스</div>
+          <div class="vslide-src">숏폼 포맷</div>
+        </div>
+        <div class="vdots"><span class="vdot on"></span><span class="vdot"></span></div>
+      </div>
+      <div class="vcard-body">
+        <div class="tdesc" style="font-size:11px;margin-bottom:8px">숏폼: 역동적 제품 역량 강조</div>
+        <div class="tags"><span class="tag t-p">숏폼</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 냉감 소재 -->
+  <div class="card c3" data-f="soon" data-kw="자외선 냉감 선크림 카드뉴스 뷰티" style="animation-delay:.35s;grid-column:span 3" onclick="openM('uv')">
+    <div class="ci-nopad">
+      <div class="vcarousel vcarousel-sm" id="vc-uv">
+        <div class="vslide active" style="background:linear-gradient(135deg,#1a1000 0%,#d97706 50%,#fde68a 100%)">
+          <div class="vslide-emoji">☀️</div>
+          <div class="vslide-kw">자외선 차단</div>
+          <div class="vslide-src">냉감 소재 · 여름</div>
+        </div>
+        <div class="vslide" style="background:linear-gradient(135deg,#001a1a 0%,#0d9488 50%,#99f6e4 100%)">
+          <div class="vslide-emoji">❄️</div>
+          <div class="vslide-kw">냉감 라이프</div>
+          <div class="vslide-src">카드뉴스 포맷</div>
+        </div>
+        <div class="vdots"><span class="vdot on"></span><span class="vdot"></span></div>
+      </div>
+      <div class="vcard-body">
+        <div class="tdesc" style="font-size:11px;margin-bottom:8px">카드뉴스: SPF 제품 올바른 사용법</div>
+        <div class="tags"><span class="tag t-p">카드뉴스</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 모니터링 -->
+  <div class="card c12" data-f="watch" data-kw="모니터링 스파이더맨 월드컵 선크림 스테이케이션" style="animation-delay:.4s">
     <div class="ci">
       <div class="clbl"><span class="chp" style="background:var(--blu-bg);color:var(--blue)">👁</span>다음 주 모니터링</div>
-      <div class="kwl">
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
         <a class="kw" href="https://trends.google.com/trends/explore?q=스파이더맨+개봉&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">스파이더맨 개봉</span><span class="kwt">예측</span></a>
         <a class="kw" href="https://trends.google.com/trends/explore?q=월드컵+16강&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">월드컵 16강</span><span class="kwt">예측</span></a>
         <a class="kw" href="https://trends.google.com/trends/explore?q=여름+선크림&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">여름 선크림 추천</span><span class="kwt">파생</span></a>
@@ -730,6 +838,24 @@ window.addEventListener('load',()=>{
     document.querySelectorAll('.bfil').forEach(b=>{b.style.width=b.dataset.w+'%';});
   },400);
 });
+
+// ── CAROUSEL AUTO-ROLL ──
+function initCarousels(){
+  document.querySelectorAll('.vcarousel').forEach(vc=>{
+    const slides=vc.querySelectorAll('.vslide');
+    const dots=vc.querySelectorAll('.vdot');
+    if(slides.length<2) return;
+    let cur=0;
+    setInterval(()=>{
+      slides[cur].classList.remove('active');
+      dots[cur] && dots[cur].classList.remove('on');
+      cur=(cur+1)%slides.length;
+      slides[cur].classList.add('active');
+      dots[cur] && dots[cur].classList.add('on');
+    },3200);
+  });
+}
+window.addEventListener('load', initCarousels);
 </script>
 </body>
 </html>
