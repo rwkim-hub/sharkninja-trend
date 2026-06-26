@@ -34,6 +34,10 @@
 html{scroll-behavior:smooth}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 60% 40% at 20% 0%,rgba(96,165,250,0.05) 0%,transparent 60%),radial-gradient(ellipse 50% 35% at 80% 100%,rgba(167,139,250,0.04) 0%,transparent 60%)}
+@keyframes floatUp{0%{transform:translateY(0) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:.6}100%{transform:translateY(-100vh) rotate(20deg);opacity:0}}
+.emoji-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.emoji-bg span{position:absolute;bottom:-60px;font-size:22px;animation:floatUp linear infinite;opacity:0;filter:blur(0.4px)}
+[data-theme="light"] .emoji-bg span{filter:blur(0.3px)}
 
 /* NAV */
 .nav-wrap{position:sticky;top:14px;z-index:100;display:flex;justify-content:center;padding:14px 24px 0;pointer-events:none}
@@ -244,6 +248,9 @@ h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
 </style>
 </head>
 <body>
+
+<!-- EMOJI BG -->
+<div class="emoji-bg" id="emojiBg"></div>
 
 <!-- NAV -->
 <div class="nav-wrap">
@@ -573,6 +580,23 @@ h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
 </div>
 
 <script>
+(function(){
+  const emojis=['🦈','🥷','🦈','🥷','🦈','🥷'];
+  let ei=0;
+  const bg=document.getElementById('emojiBg');
+  function spawn(){
+    const el=document.createElement('span');
+    el.textContent=emojis[ei++%emojis.length];
+    el.style.left=(Math.random()*96+2)+'vw';
+    const dur=14+Math.random()*16;
+    el.style.animation=`floatUp ${dur}s linear forwards`;
+    el.style.fontSize=(14+Math.random()*16)+'px';
+    bg.appendChild(el);
+    setTimeout(()=>el.remove(),dur*1000+200);
+  }
+  for(let i=0;i<10;i++) setTimeout(spawn,i*700);
+  setInterval(spawn,2000);
+})();
 (function(){
   const t=localStorage.getItem('theme')||'dark';
   document.documentElement.setAttribute('data-theme',t);
