@@ -698,21 +698,21 @@ h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
           <div><div class="own-link-name">YouTube</div><div class="own-link-handle">@SharkNinjakr</div></div>
           <div class="own-link-arr">↗</div>
         </a>
-        <a class="own-link" href="https://www.tiktok.com/@sharkhome" target="_blank">
-          <div class="own-link-ico">🎵</div>
-          <div><div class="own-link-name">TikTok</div><div class="own-link-handle">@sharkhome</div></div>
-          <div class="own-link-arr">↗</div>
-        </a>
         <a class="own-link" href="https://www.threads.com/@sharkhome.kr" target="_blank">
           <div class="own-link-ico">🧵</div>
           <div><div class="own-link-name">Threads</div><div class="own-link-handle">@sharkhome.kr</div></div>
           <div class="own-link-arr">↗</div>
         </a>
-        <a class="own-link" href="https://x.com/SharkHomeUS" target="_blank">
+        <div class="own-link" style="opacity:.45;cursor:default">
+          <div class="own-link-ico">🎵</div>
+          <div><div class="own-link-name">TikTok</div><div class="own-link-handle" style="color:var(--amber)">개설 예정</div></div>
+          <div class="own-link-arr" style="font-size:10px;color:var(--amber)">준비중</div>
+        </div>
+        <div class="own-link" style="opacity:.45;cursor:default">
           <div class="own-link-ico">𝕏</div>
-          <div><div class="own-link-name">Twitter / X</div><div class="own-link-handle">@SharkHomeUS</div></div>
-          <div class="own-link-arr">↗</div>
-        </a>
+          <div><div class="own-link-name">Twitter / X</div><div class="own-link-handle" style="color:var(--amber)">개설 예정</div></div>
+          <div class="own-link-arr" style="font-size:10px;color:var(--amber)">준비중</div>
+        </div>
       </div>
     </div>
     <!-- Ninja Kitchen -->
@@ -732,21 +732,21 @@ h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
           <div><div class="own-link-name">YouTube</div><div class="own-link-handle">@SharkNinjakr</div></div>
           <div class="own-link-arr">↗</div>
         </a>
-        <a class="own-link" href="https://www.tiktok.com/@ninjakitchen" target="_blank">
-          <div class="own-link-ico">🎵</div>
-          <div><div class="own-link-name">TikTok</div><div class="own-link-handle">@ninjakitchen</div></div>
-          <div class="own-link-arr">↗</div>
-        </a>
         <a class="own-link" href="https://www.threads.com/@ninjakitchen.kr" target="_blank">
           <div class="own-link-ico">🧵</div>
           <div><div class="own-link-name">Threads</div><div class="own-link-handle">@ninjakitchen.kr</div></div>
           <div class="own-link-arr">↗</div>
         </a>
-        <a class="own-link" href="https://x.com/NinjaKitchen" target="_blank">
+        <div class="own-link" style="opacity:.45;cursor:default">
+          <div class="own-link-ico">🎵</div>
+          <div><div class="own-link-name">TikTok</div><div class="own-link-handle" style="color:var(--amber)">개설 예정</div></div>
+          <div class="own-link-arr" style="font-size:10px;color:var(--amber)">준비중</div>
+        </div>
+        <div class="own-link" style="opacity:.45;cursor:default">
           <div class="own-link-ico">𝕏</div>
-          <div><div class="own-link-name">Twitter / X</div><div class="own-link-handle">@NinjaKitchen</div></div>
-          <div class="own-link-arr">↗</div>
-        </a>
+          <div><div class="own-link-name">Twitter / X</div><div class="own-link-handle" style="color:var(--amber)">개설 예정</div></div>
+          <div class="own-link-arr" style="font-size:10px;color:var(--amber)">준비중</div>
+        </div>
       </div>
     </div>
   </div>
@@ -826,7 +826,7 @@ h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
   setInterval(spawn,2000);
 })();
 (function(){
-  const t=localStorage.getItem('theme')||'dark';
+  const t=localStorage.getItem('theme')||'light';
   document.documentElement.setAttribute('data-theme',t);
   document.addEventListener('DOMContentLoaded',()=>{
     document.getElementById('themeBtn').textContent=t==='light'?'🌙':'☀️';
