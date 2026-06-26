@@ -18,6 +18,18 @@
   --blue:#60a5fa; --blu-bg:rgba(96,165,250,0.08); --blu-b:rgba(96,165,250,0.22);
   --purple:#a78bfa; --pur-bg:rgba(167,139,250,0.08); --pur-b:rgba(167,139,250,0.22);
   --ease:cubic-bezier(0.32,0.72,0,1);
+  --nav-bg:rgba(8,8,14,0.82);
+}
+[data-theme="light"] {
+  --bg:#f4f4f8; --bg1:#eaeaef; --bg2:#e2e2e8; --bg3:#d8d8e0;
+  --bd:rgba(0,0,0,0.07); --bdh:rgba(0,0,0,0.14);
+  --t1:#16161f; --t2:#606080; --t3:#a0a0b8;
+  --red:#e03030; --red-bg:rgba(224,48,48,0.08); --red-b:rgba(224,48,48,0.22);
+  --amber:#c97d00; --amb-bg:rgba(201,125,0,0.08); --amb-b:rgba(201,125,0,0.22);
+  --green:#1a9e60; --grn-bg:rgba(26,158,96,0.08); --grn-b:rgba(26,158,96,0.22);
+  --blue:#2563eb; --blu-bg:rgba(37,99,235,0.08); --blu-b:rgba(37,99,235,0.22);
+  --purple:#7c3aed; --pur-bg:rgba(124,58,237,0.08); --pur-b:rgba(124,58,237,0.22);
+  --nav-bg:rgba(248,248,252,0.88);
 }
 html{scroll-behavior:smooth}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden}
@@ -25,7 +37,9 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
 
 /* NAV */
 .nav-wrap{position:sticky;top:14px;z-index:100;display:flex;justify-content:center;padding:14px 24px 0;pointer-events:none}
-.nav{pointer-events:all;background:rgba(8,8,14,0.82);border:1px solid var(--bdh);border-radius:999px;padding:7px 7px 7px 18px;display:flex;align-items:center;gap:6px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.04),0 20px 60px rgba(0,0,0,0.5)}
+.nav{pointer-events:all;background:var(--nav-bg);border:1px solid var(--bdh);border-radius:999px;padding:7px 7px 7px 18px;display:flex;align-items:center;gap:6px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.04),0 20px 60px rgba(0,0,0,0.5);transition:background .3s var(--ease)}
+.theme-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--bdh);background:var(--bg2);color:var(--t2);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s var(--ease);flex-shrink:0}
+.theme-btn:hover{background:var(--bg3);color:var(--t1);transform:scale(1.08)}
 .nav-brand{font-size:13px;font-weight:800;letter-spacing:-0.01em;margin-right:6px;white-space:nowrap}
 .nav-brand span{color:var(--blue)}
 .npill{font-size:11px;font-weight:500;padding:5px 13px;border-radius:999px;color:var(--t2);cursor:pointer;background:none;border:1px solid transparent;font-family:inherit;transition:all .3s var(--ease);white-space:nowrap}
@@ -239,6 +253,7 @@ h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
     <button class="npill" onclick="switchTab('comp',this)">경쟁사</button>
     <button class="npill" onclick="switchTab('archive',this)">아카이브</button>
     <div class="nav-wk">W26</div>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="라이트/다크 모드">🌙</button>
   </nav>
 </div>
 
@@ -258,7 +273,7 @@ h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
     </div>
     <div class="wk-block">
       <div class="wk-num">W26</div>
-      <div class="wk-range">2026.06.19 — 06.25</div>
+      <div class="wk-range">2026.06.22 — 06.28</div>
     </div>
   </div>
 </div>
@@ -280,9 +295,9 @@ h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
 <!-- STATS -->
 <div class="stats">
   <div class="sc"><div class="si"><div class="sl">수집 소스</div><div class="sn">2</div><div class="ss">Google · YouTube</div></div></div>
-  <div class="sc"><div class="si"><div class="sl">분석 키워드</div><div class="sn">12</div><div class="ss">이번 주 기준</div></div></div>
+  <div class="sc"><div class="si"><div class="sl">분석 키워드</div><div class="sn">15</div><div class="ss">이번 주 기준</div></div></div>
   <div class="sc s-red"><div class="si"><div class="sl">긴급 소재</div><div class="sn">2</div><div class="ss">이번 주 必 사용</div></div></div>
-  <div class="sc s-grn"><div class="si"><div class="sl">콘텐츠 아이디어</div><div class="sn">14</div><div class="ss">포맷 포함</div></div></div>
+  <div class="sc s-grn"><div class="si"><div class="sl">콘텐츠 아이디어</div><div class="sn">17</div><div class="ss">포맷 포함</div></div></div>
 </div>
 
 <!-- TREND GRID -->
@@ -358,12 +373,12 @@ h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
     <div class="ci">
       <div class="clbl"><span class="chp" style="background:var(--pur-bg);color:var(--purple)">📊</span>트렌드 관심도</div>
       <div class="bars">
-        <div class="brow"><div class="blbl">Hearts2Hearts</div><div class="btrk"><div class="bfil" data-w="92" style="background:var(--red)"></div></div><div class="bval">92</div></div>
-        <div class="brow"><div class="blbl">FIFA 월드컵</div><div class="btrk"><div class="bfil" data-w="88" style="background:var(--red)"></div></div><div class="bval">88</div></div>
-        <div class="brow"><div class="blbl">스파이더맨</div><div class="btrk"><div class="bfil" data-w="74" style="background:var(--amber)"></div></div><div class="bval">74</div></div>
-        <div class="brow"><div class="blbl">여름휴가</div><div class="btrk"><div class="bfil" data-w="68" style="background:var(--amber)"></div></div><div class="bval">68</div></div>
-        <div class="brow"><div class="blbl">Stray Kids</div><div class="btrk"><div class="bfil" data-w="61" style="background:var(--green)"></div></div><div class="bval">61</div></div>
-        <div class="brow"><div class="blbl">냉감 소재</div><div class="btrk"><div class="bfil" data-w="55" style="background:var(--green)"></div></div><div class="bval">55</div></div>
+        <div class="brow"><div class="blbl">Hearts2Hearts</div><div class="btrk"><div class="bfil" data-w="95" style="background:var(--red)"></div></div><div class="bval">95</div></div>
+        <div class="brow"><div class="blbl">FIFA 월드컵</div><div class="btrk"><div class="bfil" data-w="91" style="background:var(--red)"></div></div><div class="bval">91</div></div>
+        <div class="brow"><div class="blbl">스파이더맨</div><div class="btrk"><div class="bfil" data-w="77" style="background:var(--amber)"></div></div><div class="bval">77</div></div>
+        <div class="brow"><div class="blbl">호프 (영화)</div><div class="btrk"><div class="bfil" data-w="69" style="background:var(--amber)"></div></div><div class="bval">69</div></div>
+        <div class="brow"><div class="blbl">Stray Kids</div><div class="btrk"><div class="bfil" data-w="63" style="background:var(--green)"></div></div><div class="bval">63</div></div>
+        <div class="brow"><div class="blbl">필코노미</div><div class="btrk"><div class="bfil" data-w="52" style="background:var(--green)"></div></div><div class="bval">52</div></div>
       </div>
     </div>
   </div>
@@ -465,11 +480,11 @@ h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
     <div class="ci">
       <div class="clbl"><span class="chp" style="background:var(--blu-bg);color:var(--blue)">👁</span>다음 주 모니터링</div>
       <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
-        <a class="kw" href="https://trends.google.com/trends/explore?q=스파이더맨+개봉&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">스파이더맨 개봉</span><span class="kwt">예측</span></a>
-        <a class="kw" href="https://trends.google.com/trends/explore?q=월드컵+16강&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">월드컵 16강</span><span class="kwt">예측</span></a>
-        <a class="kw" href="https://trends.google.com/trends/explore?q=여름+선크림&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">여름 선크림 추천</span><span class="kwt">파생</span></a>
-        <a class="kw" href="https://trends.google.com/trends/explore?q=스테이케이션&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">스테이케이션</span><span class="kwt">파생</span></a>
-        <a class="kw" href="https://trends.google.com/trends/explore?q=Hearts2Hearts&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">Hearts2Hearts 컴백</span><span class="kwt">예측</span></a>
+        <a class="kw" href="https://trends.google.com/trends/explore?q=스파이더맨+개봉&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">스파이더맨 개봉</span><span class="kwt">↑ 예측</span></a>
+        <a class="kw" href="https://trends.google.com/trends/explore?q=월드컵+16강&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">월드컵 16강</span><span class="kwt">↑ 예측</span></a>
+        <a class="kw" href="https://trends.google.com/trends/explore?q=호프+영화&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">호프 영화 개봉</span><span class="kwt">↑ 예측</span></a>
+        <a class="kw" href="https://trends.google.com/trends/explore?q=필코노미&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">필코노미 소비</span><span class="kwt">→ 파생</span></a>
+        <a class="kw" href="https://trends.google.com/trends/explore?q=Hearts2Hearts&geo=KR" target="_blank" onclick="event.stopPropagation()"><span class="kwn">Hearts2Hearts 차트</span><span class="kwt">→ 지속</span></a>
       </div>
     </div>
   </div>
@@ -558,6 +573,21 @@ h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
 </div>
 
 <script>
+(function(){
+  const t=localStorage.getItem('theme')||'dark';
+  document.documentElement.setAttribute('data-theme',t);
+  document.addEventListener('DOMContentLoaded',()=>{
+    document.getElementById('themeBtn').textContent=t==='light'?'🌙':'☀️';
+  });
+})();
+function toggleTheme(){
+  const html=document.documentElement;
+  const next=html.getAttribute('data-theme')==='light'?'dark':'light';
+  html.setAttribute('data-theme',next);
+  localStorage.setItem('theme',next);
+  document.getElementById('themeBtn').textContent=next==='light'?'🌙':'☀️';
+}
+
 const MD = {
   hearts:{icon:'🎵',bg:'var(--red-bg)',ey:'긴급 · K-POP',title:'Hearts2Hearts — Lemon Tang',
     tags:[{l:'릴스',c:'t-b'},{l:'K-POP',c:''},{l:'긴급',c:'t-r'}],
@@ -632,6 +662,22 @@ const MD = {
            {t:'<b>기회</b> — 경쟁사 활동 LOW. 주방가전 카테고리 점유 최적 시점'}],
     links:[{t:'Tefal Korea IG',u:'https://www.instagram.com/tefal_korea/'},
            {t:'Google Trends',u:'https://trends.google.com/trends/explore?q=에어프라이어+레시피&geo=KR'}]},
+  hope:{icon:'🎬',bg:'var(--grn-bg)',ey:'이번 주 활용 · 한국영화',title:'호프 — 한국 영화 메이킹 공개',
+    tags:[{l:'숏폼',c:'t-p'},{l:'한국영화',c:''},{l:'감성',c:'t-a'}],
+    desc:'한국 영화 호프 메이킹 예고편이 유튜브 급상승 5위 진입. 감성 스토리텔링 무드가 소셜에서 공감 높음. 샤크닌자 "일상의 소중한 순간을 위한 제품" 감성 연결 가능.',
+    ideas:[{t:'<b>릴스</b> — "집에서 가장 빛나는 순간" 감성 홈케어 루틴. 따뜻한 조명·클린한 공간'},
+           {t:'<b>카드뉴스</b> — "호프처럼, 새로운 시작을 위한 홈 클리닝" 스토리 포맷'},
+           {t:'<b>숏폼</b> — 메이킹 무드 차용, 제품 제조 과정/기술력 감성 영상'}],
+    links:[{t:'YouTube — 호프 메이킹',u:'https://www.youtube.com/results?search_query=호프+영화+메이킹'},
+           {t:'Google Trends',u:'https://trends.google.com/trends/explore?q=호프+영화&geo=KR'}]},
+  feelconomy:{icon:'💜',bg:'var(--pur-bg)',ey:'라이프스타일 트렌드',title:'필코노미 — 감성 소비 트렌드',
+    tags:[{l:'카드뉴스',c:'t-p'},{l:'라이프스타일',c:''},{l:'소비트렌드',c:''}],
+    desc:'2026 핵심 소비 키워드 필코노미(Feelconomy). 기능·스펙보다 "기분이 좋아지는가"가 구매 결정 기준. 샤크닌자 제품을 스펙 설명이 아닌 감정·경험 중심으로 소개하는 전략이 유효.',
+    ideas:[{t:'<b>카드뉴스</b> — "청소 후 달라진 기분" 감성 카피. 스펙 대신 경험값 강조'},
+           {t:'<b>릴스</b> — 제품 사용 전/후 공간 무드 변화. 음악·조명 분위기 중심'},
+           {t:'<b>숏폼</b> — "이 청소기 쓰고 나서 집이 좋아졌어요" UGC 스타일 리뷰'}],
+    links:[{t:'Deloitte 트렌드 트래커 2026.06',u:'https://www.deloitte.com/kr/ko/our-thinking/Monthly-Trend-Tracker/trend-tracker-2026-06.html'},
+           {t:'Google Trends (필코노미)',u:'https://trends.google.com/trends/explore?q=필코노미&geo=KR'}]},
   soon:{icon:'🟡',bg:'var(--amb-bg)',ey:'이번 주~다음 주',title:'이번 주~다음 주 활용 트렌드',
     tags:[{l:'카드뉴스',c:'t-p'},{l:'릴스',c:'t-p'},{l:'숏폼',c:'t-p'}],
     desc:'스파이더맨 개봉, 여름휴가, Stray Kids, 냉감 소재 — 이번 주부터 다음 주까지 활용 가능한 소재들입니다. 각 카드를 개별 클릭하면 상세 아이디어를 볼 수 있습니다.',
