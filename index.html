@@ -54,6 +54,56 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
 /* ARCHIVE */
 .arc-sec{display:none;animation:fadeUp .7s var(--ease) both}
 .arc-sec.show{display:block}
+/* NEW SECTIONS */
+.new-sec{display:none;animation:fadeUp .7s var(--ease) both}
+.new-sec.show{display:block}
+/* 해외 트렌드 */
+.global-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.gtcard{background:var(--bg1);border:1px solid var(--bd);border-radius:20px;padding:20px;transition:border-color .25s var(--ease)}
+.gtcard:hover{border-color:var(--bdh)}
+.gtcard-hd{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.gtflag{font-size:24px;line-height:1}
+.gtname{font-size:13px;font-weight:700;color:var(--t1)}
+.gtsub{font-size:11px;color:var(--t2);margin-top:1px}
+.gtrow{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--bd)}
+.gtrow:last-child{border-bottom:none}
+.gtrank{font-size:11px;font-weight:700;color:var(--t3);width:18px;flex-shrink:0}
+.gtkw{font-size:12px;color:var(--t1);flex:1}
+.gtbadge{font-size:10px;padding:2px 7px;border-radius:99px;font-weight:600}
+.gt-hot{background:var(--red-bg);color:var(--red)}
+.gt-warm{background:var(--amb-bg);color:var(--amber)}
+.gt-cool{background:var(--grn-bg);color:var(--green)}
+.glink{font-size:10px;color:var(--blue);text-decoration:none;margin-left:auto;opacity:.7}
+.glink:hover{opacity:1}
+/* 자사 채널 */
+.own-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.owncard{background:var(--bg1);border:1px solid var(--bd);border-radius:20px;overflow:hidden;transition:border-color .25s var(--ease)}
+.owncard:hover{border-color:var(--bdh)}
+.own-hd{padding:18px 20px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--bd)}
+.own-logo{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.own-brand{font-size:13px;font-weight:700;color:var(--t1)}
+.own-desc{font-size:11px;color:var(--t2);margin-top:2px}
+.own-links{padding:12px 20px}
+.own-link{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;text-decoration:none;transition:background .2s var(--ease);cursor:pointer}
+.own-link:hover{background:var(--bg2)}
+.own-link-ico{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;background:var(--bg3)}
+.own-link-name{font-size:12px;font-weight:600;color:var(--t1)}
+.own-link-handle{font-size:11px;color:var(--t2);margin-top:1px}
+.own-link-arr{margin-left:auto;font-size:11px;color:var(--t3)}
+/* 콘텐츠 캘린더 */
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:24px}
+.cal-day{background:var(--bg1);border:1px solid var(--bd);border-radius:16px;padding:12px 10px;min-height:160px;transition:border-color .25s var(--ease)}
+.cal-day:hover{border-color:var(--bdh)}
+.cal-day.today{border-color:var(--blue);background:var(--blu-bg)}
+.cal-day.weekend{opacity:.55}
+.cal-dname{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;margin-bottom:4px}
+.cal-date{font-size:18px;font-weight:800;color:var(--t1);margin-bottom:10px}
+.cal-day.today .cal-date{color:var(--blue)}
+.cal-item{background:var(--bg2);border-radius:8px;padding:6px 8px;margin-bottom:6px;cursor:default}
+.cal-item-fmt{font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;margin-bottom:2px}
+.cal-item-txt{font-size:10px;color:var(--t1);line-height:1.4}
+.cal-empty{font-size:11px;color:var(--t3);margin-top:8px}
+@media(max-width:900px){.global-grid,.own-grid{grid-template-columns:1fr}.cal-grid{grid-template-columns:repeat(4,1fr)}}
 .arc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
 .arc-card{background:rgba(255,255,255,0.02);border:1px solid var(--bd);border-radius:20px;padding:2px;cursor:pointer;transition:border-color .35s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease)}
 .arc-card:hover{border-color:var(--bdh);transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,0,0,0.35)}
@@ -257,6 +307,9 @@ h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
   <nav class="nav">
     <div class="nav-brand"><span>Shark</span>Ninja</div>
     <button class="npill on" onclick="switchTab('trends',this)">트렌드</button>
+    <button class="npill" onclick="switchTab('global',this)">해외</button>
+    <button class="npill" onclick="switchTab('own',this)">자사</button>
+    <button class="npill" onclick="switchTab('calendar',this)">캘린더</button>
     <button class="npill" onclick="switchTab('comp',this)">경쟁사</button>
     <button class="npill" onclick="switchTab('archive',this)">아카이브</button>
     <div class="nav-wk">W26</div>
@@ -556,6 +609,181 @@ h1 .hl{color:var(--blue)} h1 .dim{color:var(--t3);font-weight:400}
     <span>📦 매주 금요일 업데이트 시 자동 아카이빙</span>
     <span>클릭하면 해당 주차 상세 내용을 확인할 수 있어요</span>
   </div>
+</div>
+
+<!-- GLOBAL TRENDS SECTION -->
+<div class="new-sec" id="globalSec">
+  <div class="hero" style="padding:40px 0 28px">
+    <div class="eyebrow"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block"></span>해외 트렌드 · W26</div>
+    <h1>글로벌 <span class="hl">트렌드</span> 모니터링</h1>
+    <p style="font-size:13px;color:var(--t2);margin-top:8px">미국·일본 급상승 트렌드를 2~3주 선행 지표로 활용하세요</p>
+  </div>
+  <div class="global-grid">
+    <!-- 미국 -->
+    <div class="gtcard">
+      <div class="gtcard-hd">
+        <div class="gtflag">🇺🇸</div>
+        <div><div class="gtname">미국 YouTube 급상승</div><div class="gtsub">국내 유입 예상 2~3주 후</div></div>
+        <a class="glink" href="https://www.youtube.com/feed/trending?gl=US" target="_blank">전체보기 ↗</a>
+      </div>
+      <div class="gtrow"><div class="gtrank">1</div><div class="gtkw">Kendrick Lamar — 그래미 휩쓸기</div><span class="gtbadge gt-hot">🔥 HOT</span></div>
+      <div class="gtrow"><div class="gtrank">2</div><div class="gtkw">AI Agent 실사용 후기 / 자동화</div><span class="gtbadge gt-hot">🔥 HOT</span></div>
+      <div class="gtrow"><div class="gtrank">3</div><div class="gtkw">Spider-Man Brand New Day 트레일러</div><span class="gtbadge gt-warm">📈 상승</span></div>
+      <div class="gtrow"><div class="gtrank">4</div><div class="gtkw">Slow Living / Soft Life 브이로그</div><span class="gtbadge gt-warm">📈 상승</span></div>
+      <div class="gtrow"><div class="gtrank">5</div><div class="gtkw">Home Cleaning Routine ASMR</div><span class="gtbadge gt-cool">→ 지속</span></div>
+    </div>
+    <!-- 일본 -->
+    <div class="gtcard">
+      <div class="gtcard-hd">
+        <div class="gtflag">🇯🇵</div>
+        <div><div class="gtname">일본 YouTube 급상승</div><div class="gtsub">국내 유입 예상 1~2주 후</div></div>
+        <a class="glink" href="https://www.youtube.com/feed/trending?gl=JP" target="_blank">전체보기 ↗</a>
+      </div>
+      <div class="gtrow"><div class="gtrank">1</div><div class="gtkw">FIFA 월드컵 — 일본 경기 하이라이트</div><span class="gtbadge gt-hot">🔥 HOT</span></div>
+      <div class="gtrow"><div class="gtrank">2</div><div class="gtkw">여름 애니메이션 신작 PV (2026)</div><span class="gtbadge gt-hot">🔥 HOT</span></div>
+      <div class="gtrow"><div class="gtrank">3</div><div class="gtkw">K-POP 커버댄스 챌린지</div><span class="gtbadge gt-warm">📈 상승</span></div>
+      <div class="gtrow"><div class="gtrank">4</div><div class="gtkw">미니멀 청소 루틴 숏폼</div><span class="gtbadge gt-warm">📈 상승</span></div>
+      <div class="gtrow"><div class="gtrank">5</div><div class="gtkw">요리 레시피 × 가전 콜라보</div><span class="gtbadge gt-cool">→ 지속</span></div>
+    </div>
+    <!-- 미국 Google Trends -->
+    <div class="gtcard">
+      <div class="gtcard-hd">
+        <div class="gtflag">🇺🇸</div>
+        <div><div class="gtname">미국 Google 급상승</div><div class="gtsub">소비재·라이프스타일 필터</div></div>
+        <a class="glink" href="https://trends.google.com/trending?geo=US" target="_blank">전체보기 ↗</a>
+      </div>
+      <div class="gtrow"><div class="gtrank">1</div><div class="gtkw">Quiet Luxury Home</div><span class="gtbadge gt-hot">🔥 HOT</span></div>
+      <div class="gtrow"><div class="gtrank">2</div><div class="gtkw">Shark Robot Vacuum vs Roomba</div><span class="gtbadge gt-hot">🔥 HOT</span></div>
+      <div class="gtrow"><div class="gtrank">3</div><div class="gtkw">Ninja Creami Summer Recipes</div><span class="gtbadge gt-warm">📈 상승</span></div>
+      <div class="gtrow"><div class="gtrank">4</div><div class="gtkw">Summer Cleaning Tips 2026</div><span class="gtbadge gt-warm">📈 상승</span></div>
+      <div class="gtrow"><div class="gtrank">5</div><div class="gtkw">Air Purifier Allergy Season</div><span class="gtbadge gt-cool">→ 지속</span></div>
+    </div>
+    <!-- SharkNinja 관련 해외 인사이트 -->
+    <div class="gtcard">
+      <div class="gtcard-hd">
+        <div class="gtflag">💡</div>
+        <div><div class="gtname">해외 → 국내 선행 인사이트</div><div class="gtsub">적용 추천 시점</div></div>
+      </div>
+      <div class="gtrow"><div class="gtrank" style="font-size:14px">🎯</div><div class="gtkw"><b>Quiet Luxury Home</b> — 미니멀 고급 인테리어 무드. 국내 유입 2주 후 예상</div><span class="gtbadge gt-hot">선점</span></div>
+      <div class="gtrow"><div class="gtrank" style="font-size:14px">🎯</div><div class="gtkw"><b>Ninja Creami 레시피</b> — 여름 아이스크림 메이커 콘텐츠. 지금 바로 활용 가능</div><span class="gtbadge gt-warm">즉시</span></div>
+      <div class="gtrow"><div class="gtrank" style="font-size:14px">🎯</div><div class="gtkw"><b>Slow Living 브이로그</b> — 집에서 즐기는 여유 무드. 홈케어 감성 연결</div><span class="gtbadge gt-cool">준비</span></div>
+      <div class="gtrow"><div class="gtrank" style="font-size:14px">🎯</div><div class="gtkw"><b>K-POP 커버댄스 (일본발)</b> — Hearts2Hearts 챌린지 역수출 가능성</div><span class="gtbadge gt-cool">모니터링</span></div>
+    </div>
+  </div>
+  <div class="footer"><span>🌐 데이터 정확도 <strong style="color:var(--amber)">추정</strong> · 웹 검색 기반</span><span>매주 금요일 자동 업데이트</span></div>
+</div>
+
+<!-- OWN CHANNEL SECTION -->
+<div class="new-sec" id="ownSec">
+  <div class="hero" style="padding:40px 0 28px">
+    <div class="eyebrow"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block"></span>자사 채널 · W26</div>
+    <h1>SharkNinja <span class="hl">자사 채널</span> 모니터링</h1>
+    <p style="font-size:13px;color:var(--t2);margin-top:8px">Shark Home · Ninja Kitchen 한국 공식 SNS 채널 현황</p>
+  </div>
+  <div class="own-grid">
+    <!-- Shark Home -->
+    <div class="owncard">
+      <div class="own-hd">
+        <div class="own-logo" style="background:rgba(96,165,250,0.12)">🦈</div>
+        <div><div class="own-brand">Shark Home 코리아</div><div class="own-desc">청소기 · 공기청정기 · 홈케어</div></div>
+      </div>
+      <div class="own-links">
+        <a class="own-link" href="https://www.instagram.com/sharkhome.kr/" target="_blank">
+          <div class="own-link-ico">📸</div>
+          <div><div class="own-link-name">Instagram</div><div class="own-link-handle">@sharkhome.kr</div></div>
+          <div class="own-link-arr">↗</div>
+        </a>
+        <a class="own-link" href="https://www.youtube.com/@SharkNinjakr" target="_blank">
+          <div class="own-link-ico">▶️</div>
+          <div><div class="own-link-name">YouTube</div><div class="own-link-handle">@SharkNinjakr</div></div>
+          <div class="own-link-arr">↗</div>
+        </a>
+        <a class="own-link" href="https://www.tiktok.com/@sharkhome" target="_blank">
+          <div class="own-link-ico">🎵</div>
+          <div><div class="own-link-name">TikTok</div><div class="own-link-handle">@sharkhome</div></div>
+          <div class="own-link-arr">↗</div>
+        </a>
+        <a class="own-link" href="https://www.threads.com/@sharkhome.kr" target="_blank">
+          <div class="own-link-ico">🧵</div>
+          <div><div class="own-link-name">Threads</div><div class="own-link-handle">@sharkhome.kr</div></div>
+          <div class="own-link-arr">↗</div>
+        </a>
+        <a class="own-link" href="https://x.com/SharkHomeUS" target="_blank">
+          <div class="own-link-ico">𝕏</div>
+          <div><div class="own-link-name">Twitter / X</div><div class="own-link-handle">@SharkHomeUS</div></div>
+          <div class="own-link-arr">↗</div>
+        </a>
+      </div>
+    </div>
+    <!-- Ninja Kitchen -->
+    <div class="owncard">
+      <div class="own-hd">
+        <div class="own-logo" style="background:rgba(167,139,250,0.12)">🥷</div>
+        <div><div class="own-brand">Ninja Kitchen 코리아</div><div class="own-desc">에어프라이어 · 블렌더 · 주방가전</div></div>
+      </div>
+      <div class="own-links">
+        <a class="own-link" href="https://www.instagram.com/ninjakitchen.kr/" target="_blank">
+          <div class="own-link-ico">📸</div>
+          <div><div class="own-link-name">Instagram</div><div class="own-link-handle">@ninjakitchen.kr</div></div>
+          <div class="own-link-arr">↗</div>
+        </a>
+        <a class="own-link" href="https://www.youtube.com/@SharkNinjakr" target="_blank">
+          <div class="own-link-ico">▶️</div>
+          <div><div class="own-link-name">YouTube</div><div class="own-link-handle">@SharkNinjakr</div></div>
+          <div class="own-link-arr">↗</div>
+        </a>
+        <a class="own-link" href="https://www.tiktok.com/@ninjakitchen" target="_blank">
+          <div class="own-link-ico">🎵</div>
+          <div><div class="own-link-name">TikTok</div><div class="own-link-handle">@ninjakitchen</div></div>
+          <div class="own-link-arr">↗</div>
+        </a>
+        <a class="own-link" href="https://www.threads.com/@ninjakitchen.kr" target="_blank">
+          <div class="own-link-ico">🧵</div>
+          <div><div class="own-link-name">Threads</div><div class="own-link-handle">@ninjakitchen.kr</div></div>
+          <div class="own-link-arr">↗</div>
+        </a>
+        <a class="own-link" href="https://x.com/NinjaKitchen" target="_blank">
+          <div class="own-link-ico">𝕏</div>
+          <div><div class="own-link-name">Twitter / X</div><div class="own-link-handle">@NinjaKitchen</div></div>
+          <div class="own-link-arr">↗</div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>🔗 링크 클릭 시 해당 채널로 바로 이동</span><span>Threads·TikTok 한국 전용 계정은 확인 후 업데이트 예정</span></div>
+</div>
+
+<!-- CALENDAR SECTION -->
+<div class="new-sec" id="calSec">
+  <div class="hero" style="padding:40px 0 28px">
+    <div class="eyebrow"><span style="width:6px;height:6px;border-radius:50%;background:var(--purple);display:inline-block"></span>콘텐츠 캘린더 · W26</div>
+    <h1>이번 주 <span class="hl">콘텐츠 캘린더</span></h1>
+    <p style="font-size:13px;color:var(--t2);margin-top:8px">트렌드 기반 추천 발행 스케줄 · 2026.06.22 — 06.28</p>
+  </div>
+  <div class="cal-grid">
+    <div class="cal-day weekend"><div class="cal-dname">Sun</div><div class="cal-date">22</div><div class="cal-empty">발행 없음</div></div>
+    <div class="cal-day"><div class="cal-dname">Mon</div><div class="cal-date">23</div>
+      <div class="cal-item"><div class="cal-item-fmt">릴스</div><div class="cal-item-txt">Hearts2Hearts Lemon Tang BGM 청소 루틴</div></div>
+    </div>
+    <div class="cal-day"><div class="cal-dname">Tue</div><div class="cal-date">24</div>
+      <div class="cal-item"><div class="cal-item-fmt">카드뉴스</div><div class="cal-item-txt">스파이더맨 New Arrival — 신제품 라인업</div></div>
+    </div>
+    <div class="cal-day"><div class="cal-dname">Wed</div><div class="cal-date">25</div>
+      <div class="cal-item"><div class="cal-item-fmt">숏폼</div><div class="cal-item-txt">FIFA 월드컵 응원 공간 청소 비포애프터</div></div>
+      <div class="cal-item"><div class="cal-item-fmt">스레드</div><div class="cal-item-txt">월드컵 응원 꿀팁 텍스트 포스팅</div></div>
+    </div>
+    <div class="cal-day today"><div class="cal-dname">Thu</div><div class="cal-date">26</div>
+      <div class="cal-item"><div class="cal-item-fmt">릴스</div><div class="cal-item-txt">Stray Kids RUN IT BGM 흡입력 퍼포먼스</div></div>
+    </div>
+    <div class="cal-day"><div class="cal-dname">Fri</div><div class="cal-date">27</div>
+      <div class="cal-item"><div class="cal-item-fmt">카드뉴스</div><div class="cal-item-txt">필코노미 — 기분 좋아지는 홈케어</div></div>
+      <div class="cal-item"><div class="cal-item-fmt">숏폼</div><div class="cal-item-txt">여름 냉감 라이프 × 공기청정기</div></div>
+    </div>
+    <div class="cal-day weekend"><div class="cal-dname">Sat</div><div class="cal-date">28</div>
+      <div class="cal-item"><div class="cal-item-fmt">릴스</div><div class="cal-item-txt">주말 스테이케이션 홈케어 브이로그</div></div>
+    </div>
+  </div>
+  <div class="footer"><span>📅 트렌드 기반 추천 일정 · 실제 발행은 팀 확인 후 조정</span><span>매주 금요일 자동 업데이트</span></div>
 </div>
 
 </div><!-- /wrap -->
@@ -876,29 +1104,42 @@ function switchTab(tab, btn){
   document.querySelectorAll('.npill').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
 
-  const mainSections = ['#trendGrid','#compSec','.controls','.stats','.sec-lbl','.footer:not(.arc-sec .footer)'];
   const trendEl  = document.getElementById('trendGrid');
-  const compEl   = document.getElementById('compSec');
   const compGrid = document.querySelector('.cgrid');
   const compLbl  = document.querySelector('.sec-lbl');
   const controls = document.querySelector('.controls');
   const statsEl  = document.querySelector('.stats');
   const footerEl = document.querySelector('.wrap > .footer');
   const arcSec   = document.getElementById('arcSec');
+  const globalSec= document.getElementById('globalSec');
+  const ownSec   = document.getElementById('ownSec');
+  const calSec   = document.getElementById('calSec');
 
-  if(tab==='archive'){
-    [trendEl,compGrid,compLbl,controls,statsEl,footerEl].forEach(e=>{if(e)e.style.display='none'});
+  const trendEls = [trendEl,compGrid,compLbl,controls,statsEl,footerEl];
+  const newSecs  = [arcSec,globalSec,ownSec,calSec];
+
+  trendEls.forEach(e=>{if(e)e.style.display='none'});
+  newSecs.forEach(s=>{if(s)s.classList.remove('show')});
+
+  if(tab==='trends'){
+    trendEls.forEach(e=>{if(e)e.style.display=''});
+    window.scrollTo({top:0,behavior:'smooth'});
+  } else if(tab==='archive'){
     arcSec.classList.add('show');
     renderArchive();
     arcSec.scrollIntoView({behavior:'smooth',block:'start'});
-  } else {
-    [trendEl,compGrid,compLbl,controls,statsEl,footerEl].forEach(e=>{if(e)e.style.display=''});
-    arcSec.classList.remove('show');
-    if(tab==='trends'){
-      trendEl.scrollIntoView({behavior:'smooth',block:'start'});
-    } else {
-      compLbl.scrollIntoView({behavior:'smooth',block:'start'});
-    }
+  } else if(tab==='global'){
+    globalSec.classList.add('show');
+    globalSec.scrollIntoView({behavior:'smooth',block:'start'});
+  } else if(tab==='own'){
+    ownSec.classList.add('show');
+    ownSec.scrollIntoView({behavior:'smooth',block:'start'});
+  } else if(tab==='calendar'){
+    calSec.classList.add('show');
+    calSec.scrollIntoView({behavior:'smooth',block:'start'});
+  } else if(tab==='comp'){
+    trendEls.forEach(e=>{if(e)e.style.display=''});
+    compLbl.scrollIntoView({behavior:'smooth',block:'start'});
   }
 }
 
